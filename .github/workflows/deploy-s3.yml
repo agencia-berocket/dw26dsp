@@ -1,0 +1,78 @@
+name: Deploy to S3
+
+# Publishes the static site to the private S3 origin bucket
+# (drumwave-marketing-site-new) that CloudFront reads via OAC. Auth is GitHub
+# OIDC into the shared reddrummer runner role, which the bucket policy grants
+# cross-account deploy access. No build step -- the repo is served as-is.
+#
+# Cache strategy (the CloudFront distribution honors per-object Cache-Control):
+#   - HTML + JSON  -> no-cache, so edits are visible on the next request.
+#   - other assets -> public, max-age=3600 (filenames aren't content-hashed).
+# Because HTML is no-cache, no CloudFront invalidation is needed (and the runner
+# role has no cloudfront:CreateInvalidation permission anyway).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Serialize deploys; a newer push supersedes an in-flight one.
+concurrency:
+  group: deploy-s3-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  id-token: write # required to request the OIDC token
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  BUCKET: drumwave-marketing-site-new
+  # Paths that live in the repo but are NOT part of the published site.
+  EXCLUDES: >-
+    --exclude ".git/*"
+    --exclude ".github/*"
+    --exclude "tools/*"
+    --exclude "docs/*"
+    --exclude "Figma/*"
+    --exclude "*.sh"
+    --exclude "*.md"
+    --exclude ".gitignore"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::127266044500:role/reddrummer-github-actions-runner
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Pass 1: cacheable assets. --delete prunes assets removed from the repo.
+      # HTML/JSON are excluded here so --delete never touches them (pass 2 owns
+      # them) and they don't inherit the long cache header.
+      - name: Sync assets (cacheable)
+        run: |
+          aws s3 sync . "s3://${BUCKET}" \
+            --no-progress \
+            --delete \
+            ${{ env.EXCLUDES }} \
+            --exclude "*.html" \
+            --exclude "*.json" \
+            --cache-control "public, max-age=3600"
+
+      # Pass 2: HTML + JSON with no-cache. No --delete (pass 1 handled removals).
+      # Dir excludes come AFTER the includes so any *.html under tools/docs is
+      # still filtered out.
+      - name: Sync HTML + JSON (no-cache)
+        run: |
+          aws s3 sync . "s3://${BUCKET}" \
+            --no-progress \
+            --exclude "*" \
+            --include "*.html" \
+            --include "*.json" \
+            ${{ env.EXCLUDES }} \
+            --cache-control "no-cache"

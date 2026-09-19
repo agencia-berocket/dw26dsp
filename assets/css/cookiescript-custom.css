@@ -1,0 +1,471 @@
+/* ==========================================================================
+   CookieScript — DrumWave visual identity
+   Reuses the site's own tokens: ink/bone/cobalt palette, Titillium Web for
+   headings and buttons, Open Sans for body copy, hairline borders, glass
+   blur, pill buttons and the cobalt gradient CTA from the main nav.
+   ========================================================================== */
+
+#cookiescript_injected_wrapper,
+#cookiescript_injected_wrapper * {
+  font-family: 'Open Sans', system-ui, -apple-system, sans-serif !important;
+  box-sizing: border-box !important;
+}
+
+/* ---- the banner card ---------------------------------------------------- */
+
+#cookiescript_injected {
+  left: auto !important;
+  right: 24px !important;
+  bottom: 24px !important;
+  top: auto !important;
+  width: 420px !important;
+  max-width: calc(100vw - 32px) !important;
+  max-height: calc(100vh - 48px) !important;
+  max-height: calc(100dvh - 48px) !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(243, 242, 238, .14) !important;
+  background: rgba(7, 7, 7, .92) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .45) !important;
+  padding: 0 !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+}
+
+#cookiescript_toppart {
+  flex-direction: column !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  padding: 28px 28px 20px !important;
+}
+#cookiescript_bottompart {
+  flex-direction: column !important;
+  flex: none !important;
+}
+
+#cookiescript_leftpart,
+#cookiescript_rightpart {
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  flex: none !important;
+}
+#cookiescript_rightpart {
+  flex: none !important;
+  padding: 16px 28px !important;
+  border-top: 1px solid rgba(243, 242, 238, .1) !important;
+}
+
+/* ---- pre-header: language + close --------------------------------------- */
+
+.cookiescript_pre_header {
+  position: absolute !important;
+  top: 20px !important;
+  right: 24px !important;
+  gap: 10px !important;
+}
+
+#cookiescript_close {
+  font-family: 'Open Sans', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 300 !important;
+  color: rgba(243, 242, 238, .6) !important;
+  opacity: 1 !important;
+  transition: color .2s !important;
+}
+#cookiescript_close:hover { color: #F3F2EE !important; }
+
+.cookiescript_custom_select_selected {
+  background: transparent !important;
+  border: none !important;
+}
+.cookiescript_custom_select_globe .cookiescript_globe { fill: rgba(243, 242, 238, .6) !important; }
+.cookiescript_custom_select:hover .cookiescript_globe { fill: #F3F2EE !important; }
+.cookiescript_custom_select_items {
+  background: #141414 !important;
+  border: 1px solid transparent !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  visibility: hidden !important;
+}
+.cookiescript_custom_select[aria-expanded="true"] .cookiescript_custom_select_items {
+  border-color: rgba(243, 242, 238, .14) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .5) !important;
+  visibility: visible !important;
+}
+.cookiescript_custom_select_item span { color: #F3F2EE !important; }
+.cookiescript_custom_select_item:hover { background: rgba(243, 242, 238, .08) !important; }
+
+/* ---- header + description ------------------------------------------------ */
+
+#cookiescript_header {
+  font-family: 'Titillium Web', system-ui, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 22px !important;
+  line-height: 1.15 !important;
+  letter-spacing: -.01em !important;
+  color: #F3F2EE !important;
+  margin: 0 40px 12px 0 !important;
+}
+
+#cookiescript_description {
+  font-size: 13.5px !important;
+  line-height: 1.55 !important;
+  color: #8A8A86 !important;
+  margin: 0 0 18px !important;
+}
+
+#cookiescript_readmore {
+  display: inline-block !important;
+  margin-top: 8px !important;
+  color: #278EFF !important;
+  text-decoration: underline !important;
+  text-underline-position: from-font !important;
+}
+#cookiescript_readmore:hover { color: #5BA9FF !important; }
+
+/* ---- category checkboxes -------------------------------------------------- */
+
+#cookiescript_checkboxs {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  gap: 0 !important;
+  margin: 0 0 16px !important;
+  padding-top: 14px !important;
+  border-top: 1px solid rgba(243, 242, 238, .1) !important;
+}
+
+.cookiescript_checkbox { margin: 0 !important; }
+.mdc-checkbox { padding: 6px !important; margin-right: 4px !important; }
+.cookiescript_checkbox_label { margin: 0 !important; gap: 10px !important; }
+
+.cookiescript_checkbox_text {
+  font-size: 11px !important;
+  letter-spacing: .04em !important;
+  color: #B4B4B4 !important;
+}
+
+.mdc-checkbox__background {
+  border-color: rgba(243, 242, 238, .35) !important;
+  background: transparent !important;
+  border-radius: 4px !important;
+}
+.cookiescript_checkbox_input:checked ~ .mdc-checkbox__background,
+.mdc-checkbox__background.mdc-checkbox--selected {
+  background: #1F5BFF !important;
+  border-color: #1F5BFF !important;
+}
+.cookiescript_checkbox_input:disabled ~ .mdc-checkbox__background {
+  background: rgba(31, 91, 255, .35) !important;
+  border-color: rgba(31, 91, 255, .35) !important;
+}
+.mdc-checkbox__checkmark-path { stroke: #fff !important; }
+
+/* ---- manage / show details ------------------------------------------------ */
+
+#cookiescript_manage_wrap {
+  margin: 0 0 20px !important;
+}
+#cookiescript_manage {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-family: 'Titillium Web', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  color: #8A8A86 !important;
+  transition: color .2s !important;
+}
+#cookiescript_manage:hover { color: #F3F2EE !important; }
+.cookiescript_gear { fill: currentColor !important; }
+
+/* ---- buttons --------------------------------------------------------------
+   Same shape language as .nav .pill / .closing-cta: a pill, hairline outline
+   for the secondary action, cobalt gradient fill for the primary one. */
+
+#cookiescript_buttons {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+  gap: 10px !important;
+  width: 100% !important;
+  font-weight: 400 !important;
+}
+
+#cookiescript_accept,
+#cookiescript_reject,
+#cookiescript_save {
+  flex: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 13px 24px !important;
+  border-radius: 100px !important;
+  font-family: 'Titillium Web', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  text-transform: none !important;
+  transition: background .25s, filter .25s, border-color .25s !important;
+}
+
+#cookiescript_accept {
+  border: none !important;
+  background: linear-gradient(138.73deg, #4B27FF 1.94%, #0091FF 100.59%) !important;
+  color: #fff !important;
+}
+#cookiescript_accept:hover { filter: brightness(1.12) !important; }
+
+#cookiescript_reject,
+#cookiescript_save {
+  border: 1px solid rgba(243, 242, 238, .3) !important;
+  background: transparent !important;
+  color: #F3F2EE !important;
+}
+#cookiescript_reject:hover,
+#cookiescript_save:hover { background: rgba(243, 242, 238, .1) !important; }
+
+/* ---- footer / copyright ---------------------------------------------------- */
+
+#cookiescript_copyright,
+#cookiescript_cookietablewrap {
+  color: #6F7274 !important;
+}
+#cookiescript_copyright a { color: #278EFF !important; }
+
+/* ---- language flag icons: unchanged behaviour, matches the requested swap - */
+
+.cookiescript_custom_select_flag_inner svg { display: none !important; }
+.cookiescript_custom_select_item[data-value="Português"] .cookiescript_custom_select_flag_inner {
+  background-image: url('https://drumwave.com/wp-content/uploads/2025/04/br.svg') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.cookiescript_custom_select_item[data-value="English"] .cookiescript_custom_select_flag_inner {
+  background-image: url('https://drumwave.com/wp-content/uploads/2025/04/us.svg') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 480px) {
+  #cookiescript_injected {
+    right: 10px !important;
+    left: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: calc(100vh - 20px) !important;
+    max-height: calc(100dvh - 20px) !important;
+  }
+  #cookiescript_injected #cookiescript_toppart {
+    padding: 22px 20px 16px !important;
+  }
+  #cookiescript_injected #cookiescript_rightpart {
+    padding: 14px 20px !important;
+  }
+  .cookiescript_pre_header {
+    top: 14px !important;
+    right: 16px !important;
+  }
+  #cookiescript_header {
+    font-size: 19px !important;
+    margin: 0 34px 10px 0 !important;
+  }
+  #cookiescript_description {
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .cookiescript_fsd_footer #cookiescript_buttons,
+  #cookiescript_injected_fsd #cookiescript_buttons {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+  #cookiescript_injected_fsd #cookiescript_accept,
+  #cookiescript_injected_fsd #cookiescript_reject,
+  #cookiescript_injected_fsd #cookiescript_save {
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   Full settings dialog (#cookiescript_injected_fsd) — the "Show details"
+   modal. Same dark glass surface and cobalt accent as the banner above.
+   ========================================================================== */
+
+#cookiescript_injected_fsd {
+  background-color: rgba(7, 7, 7, .6) !important;
+}
+
+#cookiescript_fsd_wrapper {
+  background-color: #101010 !important;
+  border: 1px solid rgba(243, 242, 238, .14) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .5) !important;
+  font-family: 'Open Sans', system-ui, sans-serif !important;
+  color: #F3F2EE !important;
+}
+
+.cookiescript_fsd_header,
+.cookiescript_fsd_main,
+.cookiescript_fsd_tabs,
+.cookiescript_fsd_tabs_content,
+.cookiescript_fsd_footer {
+  background-color: transparent !important;
+}
+.cookiescript_fsd_header {
+  border-bottom: 1px solid rgba(243, 242, 238, .1) !important;
+  min-height: 64px !important;
+}
+.cookiescript_fsd_header #cookiescript_close {
+  margin-left: auto !important;
+  margin-right: 20px !important;
+}
+
+.cookiescript_fsd_title {
+  font-family: 'Titillium Web', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: clamp(1.4rem, 2vw, 1.75rem) !important;
+  letter-spacing: -.01em !important;
+  color: #F3F2EE !important;
+}
+.cookiescript_fsd_description {
+  color: #8A8A86 !important;
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+}
+.cookiescript_fsd_description a {
+  color: #278EFF !important;
+  text-decoration: underline !important;
+}
+
+.cookiescript_fsd_tabs {
+  border-bottom: 1px solid rgba(243, 242, 238, .1) !important;
+}
+.cookiescript_fsd_tabs [role="tab"] {
+  background-color: transparent !important;
+  font-family: 'Titillium Web', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
+  color: #8A8A86 !important;
+}
+.cookiescript_fsd_tabs [role="tab"].cookiescript_active {
+  color: #F3F2EE !important;
+  border-top-color: #1F5BFF !important;
+  border-bottom-color: transparent !important;
+}
+
+.cookiescript_fsd_category { border-bottom: 1px solid rgba(243, 242, 238, .08) !important; }
+.cookiescript_fsd__category_name {
+  font-family: 'Titillium Web', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  color: #F3F2EE !important;
+}
+.cookiescript_category_description {
+  color: #8A8A86 !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+}
+
+.cookiescript_fsd_cookies_control {
+  color: #278EFF !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
+}
+.cookiescript_fsd_cookies_control svg { fill: #278EFF !important; }
+
+.cookiescript_fsd_cookies {
+  background-color: #161616 !important;
+  border: 1px solid rgba(243, 242, 238, .1) !important;
+  border-radius: 10px !important;
+}
+.cookiescript_fsd_cookies caption { color: #F3F2EE !important; }
+
+.cookiescript_fsd_cookies_table,
+.cookiescript_fsd_cookies_table tbody,
+.cookiescript_fsd_cookies_table thead,
+.cookiescript_fsd_cookies_table tr,
+.cookiescript_fsd_cookies_table th,
+.cookiescript_fsd_cookies_table td {
+  background-color: #161616 !important;
+  color: #B4B4B4 !important;
+}
+.cookiescript_fsd_cookies_table th {
+  color: #8A8A86 !important;
+  border-bottom: 1px solid rgba(243, 242, 238, .1) !important;
+}
+.cookiescript_fsd_cookies_table td { border-bottom: 1px solid rgba(243, 242, 238, .06) !important; }
+
+.cookiescript_fsd_cookies::-webkit-scrollbar-track,
+.cookiescript_fsd_tabs_content::-webkit-scrollbar-track { background-color: rgba(243, 242, 238, .05) !important; }
+.cookiescript_fsd_cookies::-webkit-scrollbar-thumb,
+.cookiescript_fsd_tabs_content::-webkit-scrollbar-thumb { background-color: #1F5BFF !important; }
+.cookiescript_vendor_name a,
+.cookiescript_fsd_description a,
+#cookiescript_aboutwrap a { color: #278EFF !important; }
+
+/* toggle switches: cobalt when on, translucent bone track when off */
+.mdc-switch__track { background: rgba(243, 242, 238, .18) !important; }
+.mdc-switch--selected .mdc-switch__track,
+.mdc-switch--unselected.mdc-switch--processing .mdc-switch__track { background: #1F5BFF !important; }
+.mdc-switch__handle { background: #F3F2EE !important; }
+.mdc-switch--selected .mdc-switch__icons,
+.mdc-switch__icon--on { fill: #1F5BFF !important; }
+
+.cookiescript_fsd_footer {
+  border-top: 1px solid rgba(243, 242, 238, .1) !important;
+  background: transparent !important;
+}
+.cookiescript_fsd_footer #cookiescript_buttons {
+  flex-direction: row !important;
+  gap: 12px !important;
+}
+#cookiescript_injected_fsd #cookiescript_accept,
+#cookiescript_injected_fsd #cookiescript_reject,
+#cookiescript_injected_fsd #cookiescript_save {
+  width: auto !important;
+  margin: 0 !important;
+  padding: 12px 24px !important;
+  border-radius: 100px !important;
+  font-family: 'Titillium Web', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  transition: background .25s, filter .25s !important;
+}
+#cookiescript_injected_fsd #cookiescript_accept {
+  background: linear-gradient(138.73deg, #4B27FF 1.94%, #0091FF 100.59%) !important;
+  border: none !important;
+  color: #fff !important;
+  order: 3 !important;
+}
+#cookiescript_injected_fsd #cookiescript_accept:hover { filter: brightness(1.12) !important; background: linear-gradient(138.73deg, #4B27FF 1.94%, #0091FF 100.59%) !important; }
+#cookiescript_injected_fsd #cookiescript_reject,
+#cookiescript_injected_fsd #cookiescript_save {
+  background: transparent !important;
+  border: 1px solid rgba(243, 242, 238, .3) !important;
+  color: #F3F2EE !important;
+}
+#cookiescript_injected_fsd #cookiescript_reject:hover,
+#cookiescript_injected_fsd #cookiescript_save:hover { background: rgba(243, 242, 238, .1) !important; }
+.cookiescript_fsd_reportby,
+.cookiescript_fsd_reportby a { color: #6F7274 !important; }
+.cookiescript_fsd_reportby a { color: #278EFF !important; }

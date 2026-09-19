@@ -1,0 +1,21 @@
+# DrumWave
+
+> DrumWave's dWallet lets you own, control, and grow the value of the personal data your life already creates — from your first steps to retirement. See how a Data Savings Plan works.
+
+DrumWave, Inc. is a data ownership economy company. Its products are the dWallet (a personal data wallet) and the Data Savings Plan (DSP), which let individuals own, save, and earn from the value of the data they generate. DrumWave for Business offers a Business dWallet that lets companies enrich products and services with data, turning every transaction into a traceable digital record and unlocking a new revenue stream. DrumWave never holds or sells user data — it holds only the value the data generates, similar to how a bank holds money without owning it.
+
+## Main Pages
+
+- [Personal](https://drumwave.com/): dWallet and Data Savings Plan for individuals — own, save, and grow the value of your personal data.
+- [Business](https://drumwave.com/business.html): Business dWallet — enrich products and services with data and unlock a new revenue stream.
+- [News, Press & Insights](https://drumwave.com/resources.html): Press releases, media coverage, and thought leadership about DrumWave and the data ownership economy.
+- [News, Press & Insights — Full Archive](https://drumwave.com/resources/archive.html): Plain-text index of every press/media/thought-leadership entry (title, category, date, summary), for readers that do not execute JavaScript.
+- [News, Press & Insights — Raw Data (JSON)](https://drumwave.com/assets/data/resources.json): Full structured archive of DrumWave press coverage, releases, and thought leadership.
+- [Contact](https://drumwave.com/contact.html): General contact information and inquiry form.
+- [Privacy Policy](https://drumwave.com/privacy-policy.html): Privacy practices for DrumWave, Inc. (United States).
+
+## Company
+
+- Legal entities: DrumWave, Inc. (Mountain View, California, USA) and DrumWave Brasil Tecnologia Ltda. (São Paulo, Brazil).
+- LinkedIn: https://linkedin.com/company/drumwave
+- YouTube: https://www.youtube.com/@Drumwave

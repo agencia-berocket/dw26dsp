@@ -3,17 +3,77 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DrumWave: Resources</title>
-<meta name="description" content="News, press releases, and thought leadership from DrumWave.">
+<title>DrumWave Resources: News, Press &amp; Insights</title>
+<meta name="description" content="News, press releases, and thought leadership from DrumWave — covering personal data ownership, the dWallet, and the future of the data economy.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://drumwave.com/resources.html">
+<meta name="google-site-verification" content="Uno11EyNkLUE6XqBr32cJUTJdfERnW0rC3Rj4m_h0rY">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DrumWave">
+<meta property="og:title" content="DrumWave Resources: News, Press &amp; Insights">
+<meta property="og:description" content="News, press releases, and thought leadership from DrumWave.">
+<meta property="og:url" content="https://drumwave.com/resources.html">
+<meta property="og:image" content="https://drumwave.com/assets/img/android-chrome-512x512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="DrumWave logo">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DrumWave Resources: News, Press &amp; Insights">
+<meta name="twitter:description" content="News, press releases, and thought leadership from DrumWave.">
+<meta name="twitter:image" content="https://drumwave.com/assets/img/android-chrome-512x512.png">
+
+<!-- CookieScript consent banner -->
+<script type="text/javascript" src="assets/js/cookiescript.js"></script>
+<link rel="stylesheet" href="assets/css/cookiescript-custom.css">
+<script type="text/javascript" src="assets/js/analytics.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "DrumWave",
+  "url": "https://drumwave.com",
+  "logo": "https://drumwave.com/assets/img/logo.png",
+  "sameAs": [
+    "https://linkedin.com/company/drumwave",
+    "https://www.youtube.com/@Drumwave"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "DrumWave Resources",
+  "url": "https://drumwave.com/resources.html",
+  "isPartOf": { "@type": "WebSite", "name": "DrumWave", "url": "https://drumwave.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://drumwave.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Resources", "item": "https://drumwave.com/resources.html" }
+  ]
+}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+<link rel="icon" href="assets/img/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;600&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#070707;
   --bone:#F3F2EE;
   --cobalt:#1F5BFF;
-  --green:#1FB25A;
+  --accent:#278EFF;
   --mute:#8A8A86;
   --line:rgba(243,242,238,.14);
 }
@@ -40,25 +100,94 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* nav (shared with index.html / business.html) */
 .nav{
-  position:fixed;top:22px;left:50%;transform:translateX(-50%);z-index:50;
-  width:min(900px,92vw);height:64px;padding:0 10px 0 26px;
-  display:flex;align-items:center;gap:22px;
-  border:1px solid rgba(243,242,238,.12);border-radius:40px;
-  background:rgba(7,7,7,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  font-family:'Open Sans',sans-serif;font-size:14px;
+  position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:50;
+  width:min(1200px,94vw);height:84px;padding:16px 16px 16px 24px;
+  display:flex;align-items:center;gap:40px;
+  border:1px solid rgba(139,139,139,.3);border-radius:100px;
+  background:rgba(7,7,7,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  font-family:'Titillium Web',system-ui,sans-serif;font-size:18px;line-height:1;
 }
-.nav .logo{display:flex;align-items:center;gap:14px;padding-right:18px;border-right:1px solid rgba(243,242,238,.14)}
-.nav .logo img{width:30px;height:30px;display:block;object-fit:contain;flex:none}
-.nav .logo b{font-family:'Titillium Web',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.01em}
-.nav .links{display:flex;gap:26px;margin-left:auto}
-.nav .links a{font-weight:600}
-.nav .links a.dim{font-weight:400;opacity:.8}
-.nav .sep{width:1px;height:26px;background:rgba(243,242,238,.14)}
-.nav .pill{padding:11px 18px;border-radius:30px;border:1px solid rgba(243,242,238,.25);font-weight:400;transition:background .25s,border-color .25s}
-.nav .pill.p{background:linear-gradient(90deg, #109126 0%, #11c04a 100%);border-color:transparent;font-weight:600}
-.nav .pill:hover{background:rgba(243,242,238,.1)}
-.nav .pill.p:hover{background:linear-gradient(90deg, #12a62c 0%, #14d654 100%);border-color:transparent;filter:brightness(1.1)}
-@media (max-width:760px){.nav{height:54px;padding:0 6px 0 16px;gap:12px}.nav .links,.nav .sep,.nav .pill:not(.p){display:none}.nav .logo{border:0;padding-right:0}.nav .pill.p{margin-left:auto;padding:9px 14px;font-size:13px}}
+.nav .logo{display:flex;align-items:center;gap:24px;margin-right:auto}
+.nav .logo img{width:36px;height:36px;display:block;object-fit:contain;flex:none}
+.nav .logo .rule{width:1px;height:35px;background:rgba(153,153,153,.4);flex:none}
+.nav .logo .wordmark{display:block;height:26px;width:auto}
+.nav .links{display:flex;align-items:center;gap:40px}
+.nav .links a{font-weight:400;color:rgba(255,255,255,.65);transition:color .25s,opacity .25s}
+.nav .links a:hover{color:#fff}
+.nav .links a.cur{font-weight:700;color:#fff;opacity:1}
+.nav .sep{width:1px;height:40.5px;background:rgba(255,255,255,.3);flex:none}
+.nav .ctas{display:flex;align-items:center;gap:14px}
+.nav .pill{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:12px 24px;border-radius:500px;border:.911px solid #fff;font-weight:400;line-height:24px;color:#fff;transition:background .25s,filter .25s,border-color .25s}
+.nav .pill.p{border:none;border-radius:56px;font-weight:600;background:linear-gradient(138.73deg,#4B27FF 1.94%,#0091FF 100.59%)}
+.nav .pill:hover{background:rgba(243,242,238,.12)}
+.nav .pill.p:hover{background:linear-gradient(138.73deg,#4B27FF 1.94%,#0091FF 100.59%);filter:brightness(1.12)}
+
+/* MOBILE MENU OVERLAY & MODAL (Figma exact match 4222-21393) */
+.nav-toggle{
+  display:none;align-items:center;justify-content:center;
+  width:42px;height:42px;
+  color:#FFF;background:none;border:none;
+  cursor:pointer;transition:opacity .2s;flex:none;margin-left:auto;
+}
+.nav-toggle:hover{opacity:.75}
+
+.mobile-menu-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,0.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  display:flex;justify-content:center;align-items:flex-start;
+  padding:16px;opacity:0;pointer-events:none;transition:opacity .25s ease;
+}
+.mobile-menu-overlay.is-open{
+  opacity:1;pointer-events:auto;
+}
+.mobile-menu-card{
+  width:100%;max-width:380px;
+  background:#0D0D0D;border:1px solid rgba(255,255,255,0.15);
+  border-radius:28px;padding:24px 24px 28px;
+  box-shadow:0 24px 48px rgba(0,0,0,0.8);
+  transform:translateY(-12px) scale(0.96);transition:transform .25s cubic-bezier(0.16,1,0.3,1);
+}
+.mobile-menu-overlay.is-open .mobile-menu-card{
+  transform:translateY(0) scale(1);
+}
+.mobile-menu-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.mobile-menu-head .logo{display:flex;align-items:center;gap:14px}
+.mobile-menu-head .logo .mark{width:28px;height:28px;object-fit:contain}
+.mobile-menu-head .logo .rule{width:1px;height:24px;background:rgba(153,153,153,.4)}
+.mobile-menu-head .logo .wordmark{height:16px;width:auto}
+.mobile-menu-close{
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.8);background:none;
+  border:none;cursor:pointer;
+  transition:color .2s;
+}
+.mobile-menu-close:hover{color:#FFF}
+.mobile-menu-links{display:flex;flex-direction:column;gap:18px;margin-bottom:28px}
+.mobile-menu-links a{
+  font-family:'Titillium Web',system-ui,sans-serif;font-size:20px;font-weight:400;
+  color:rgba(255,255,255,0.85);transition:color .2s;
+}
+.mobile-menu-links a.cur{font-weight:700;color:#FFF}
+.mobile-menu-links a:hover{color:#FFF}
+.mobile-menu-actions{display:flex;flex-direction:column;gap:12px}
+.mobile-menu-actions .btn-login{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:48px;border-radius:100px;border:1px solid #FFFFFF;
+  font-family:'Titillium Web',sans-serif;font-size:16px;font-weight:400;color:#FFFFFF;
+  transition:background .2s;
+}
+.mobile-menu-actions .btn-login:hover{background:rgba(255,255,255,0.12)}
+.mobile-menu-actions .btn-account{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:50px;border-radius:100px;border:none;
+  background:linear-gradient(138.73deg,#4B27FF 1.94%,#0091FF 100.59%);
+  font-family:'Titillium Web',sans-serif;font-size:16px;font-weight:600;color:#FFFFFF;
+  transition:filter .2s;
+}
+.mobile-menu-actions .btn-account:hover{filter:brightness(1.12)}
 
 /* PAGE HERO */
 #rhero{position:relative;padding:15.6vw 0 3vw;background:var(--ink);text-align:center;overflow:hidden}
@@ -81,7 +210,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   font-size:.83vw;color:rgba(255,255,255,.65);transition:background .2s,border-color .2s,color .2s;
 }
 #rfilters .tab:hover{color:#FFF;border-color:rgba(237,240,242,.3)}
-#rfilters .tab[aria-pressed="true"]{background:#0B993F;border-color:#0B993F;color:#FFF}
+#rfilters .tab[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#FFF}
 
 /* GRID */
 #rgrid{position:relative;background:var(--ink);padding:2.6vw 5vw 6vw}
@@ -100,105 +229,183 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .rcard .meta{display:flex;align-items:center;gap:.6vw;margin-bottom:.7vw}
 .rcard .tag{
   font-family:'Open Sans',sans-serif;font-weight:600;font-size:.68vw;letter-spacing:.04em;text-transform:uppercase;
-  color:#3ad478;
+  color:var(--accent);
 }
 .rcard .date{font-family:'Open Sans',sans-serif;font-weight:400;font-size:.73vw;color:var(--mute)}
 .rcard h3{font-family:'Titillium Web',sans-serif;font-weight:600;font-size:1.15vw;letter-spacing:-.02em;line-height:1.25;color:#FFF;margin-bottom:.6vw}
 .rcard p{font-family:'Open Sans',sans-serif;font-weight:400;font-size:.83vw;line-height:1.55;color:rgba(255,255,255,.62);flex:1}
-.rcard .read{margin-top:1vw;font-family:'Titillium Web',sans-serif;font-weight:600;font-size:.83vw;color:var(--green)}
+.rcard .read{margin-top:1vw;font-family:'Titillium Web',sans-serif;font-weight:600;font-size:.83vw;color:var(--accent)}
 #rempty{display:none;text-align:center;padding:4vw 0;font-family:'Open Sans',sans-serif;font-size:1vw;color:var(--mute)}
 
-/* WELCOME (shared pattern) */
-#welcome{position:relative;height:20.94vw;min-height:280px;background:var(--ink);text-align:center;padding:0}
-#welcome h2{position:absolute;left:0;top:4.16vw;width:100%;text-align:center;font-size:3.33vw;font-weight:400;letter-spacing:-.1333vw;line-height:0.93;color:#FFF}
-#welcome p{position:absolute;left:0;top:8.33vw;width:100%;text-align:center;font-family:'Open Sans',sans-serif;font-size:.9375vw;font-weight:600;line-height:1.38;color:rgba(255,255,255,0.7)}
-#welcome .form{
-  position:absolute;left:36.3vw;top:13.02vw;width:27.4vw;height:3.75vw;
-  display:flex;align-items:center;gap:.42vw;padding:.4vw .4vw .4vw 1.25vw;
-  background:#2F2F2F;border-radius:100px;
-}
-#welcome .form input{
-  flex:1;min-width:0;padding:0;border:0;background:transparent;
-  color:#FFF;font-family:'Titillium Web',sans-serif;font-size:1.04vw;font-weight:400;
-}
-#welcome .form input::placeholder{color:#FFFFFF;opacity:1}
-#welcome .form input:focus{outline:none}
-#welcome .form .btn{
-  font-family:'Titillium Web',sans-serif;font-size:.9375vw;font-weight:600;white-space:nowrap;
-  height:100%;padding:0 2.16vw;border-radius:56px;border:0;color:#FFF;cursor:pointer;
-  background:linear-gradient(132deg,#4B27FF 1.9%,#0091FF 100.6%);
-  transition:filter .25s;
-}
-#welcome .form .btn:hover,#welcome .form .btn:focus-visible{filter:brightness(1.12);outline:none}
-
-/* FOOTER (shared pattern) */
-#pfoot{position:relative;height:20.83vw;min-height:280px;background:var(--ink);overflow:hidden}
-#pfoot .wave-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
-#pfoot .id{position:absolute;left:8.87%;top:19.5%;display:flex;align-items:center;gap:.6vw;z-index:1}
-#pfoot .id .logo{width:2.19vw;height:auto;display:block}
-#pfoot .id b{font-family:'Roboto',sans-serif;font-weight:700;font-size:1.25vw;color:var(--bone)}
-#pfoot .tagline{position:absolute;left:8.85%;top:34%;font-family:'Roboto',sans-serif;font-size:1.04vw;font-weight:400;color:#B4B4B4;z-index:1}
-#pfoot .copyright{position:absolute;left:8.85%;top:50%;width:14.69%;font-family:'Roboto',sans-serif;font-size:.9375vw;font-weight:400;line-height:1.35;color:#666;z-index:1}
-#pfoot .col{position:absolute;top:23%;z-index:1;display:flex;flex-direction:column}
-#pfoot .col.links{left:49.22%}
-#pfoot .col.socials{left:70%}
-#pfoot .col b{font-family:'Roboto',sans-serif;font-weight:700;font-size:.9375vw;color:#E3E3E3;margin-bottom:1.3vw}
-#pfoot .col a{font-family:'Roboto',sans-serif;font-weight:400;font-size:.9375vw;color:#B4B4B4;margin-bottom:.7vw;transition:color .25s}
-#pfoot .col a:hover{color:#FFF}
+/* FOOTER (shared pattern, matches index.html's site-footer) */
+.site-footer{position:relative;z-index:2;display:grid;grid-template-columns:40.27vw 20.74vw 1fr;gap:0;padding:4.06vw 8.9vw 4vw;
+  background:var(--ink)}
+.site-footer .foot-social{display:flex;align-items:center;gap:.89vw;margin-top:27px}
+.site-footer .foot-social a{display:block;opacity:1;transition:opacity .25s}
+.site-footer .foot-social a:hover{opacity:.65}
+.site-footer .foot-social img{display:block;height:1.354vw;min-height:16px;width:auto}
+.site-footer .foot-logo{display:flex;align-items:center;gap:14px}
+.site-footer .foot-logo img{width:42px;height:42px;object-fit:contain}
+.site-footer .foot-logo b{font-family:'Titillium Web',sans-serif;font-weight:600;font-size:25px;letter-spacing:-.01em;color:#fff}
+.site-footer .foot-tag{margin-top:16px;font-family:'Open Sans',sans-serif;font-size:clamp(1rem,1.04vw,1.25rem);line-height:1.2;color:#B4B4B4}
+.site-footer .foot-copy{margin-top:40px;max-width:282px;font-family:'Open Sans',sans-serif;font-size:clamp(.9rem,.94vw,1.125rem);line-height:1.34;color:#666}
+.site-footer .foot-col{max-width:292px;margin-top:58px}
+.site-footer .foot-h{font-family:'Open Sans',sans-serif;font-weight:700;font-size:clamp(.9rem,.94vw,1.125rem);line-height:1.2;color:#E3E3E3}
+.site-footer .foot-col a{display:block;margin-top:24px;font-family:'Open Sans',sans-serif;font-size:clamp(.9rem,.94vw,1.125rem);line-height:1.5;color:#B4B4B4;transition:color .25s}
+.site-footer .foot-col a:first-child{margin-top:0}
+.site-footer .foot-col a:hover{color:#fff}
 
 @media (max-width:900px){
-  #rhero{padding:20vh 5vw 6vh}
-  #rhero h1{font-size:clamp(1.8rem,7vw,2.6rem)}
-  #rhero .sub{font-size:15px}
+  /* ── MOBILE NAVIGATION HEADER PILL (Figma match) ── */
+  .nav {
+    gap: 0 !important;
+    height: 52px !important;
+    padding: 0 12px 0 16px !important;
+    width: calc(100vw - 32px) !important;
+    max-width: 420px !important;
+    top: 14px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+    border-radius: 500px !important;
+  }
+  .nav .logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-right: auto !important;
+  }
+  .nav .logo .mark {
+    display: block !important;
+    width: 28px !important;
+    height: 28px !important;
+    flex: none !important;
+  }
+  .nav .logo .rule {
+    display: block !important;
+    width: 1px !important;
+    height: 18px !important;
+    background: rgba(255,255,255,0.3) !important;
+    flex: none !important;
+  }
+  .nav .logo .wordmark {
+    display: block !important;
+    height: 16px !important;
+    width: auto !important;
+    flex: none !important;
+  }
+  .nav .links, .nav .sep, .nav .ctas {
+    display: none !important;
+  }
+  .nav-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    margin-left: auto !important;
+    color: rgba(255,255,255,0.8) !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    flex: none !important;
+    cursor: pointer !important;
+  }
+}
 
-  #rfilters{padding:1.6em 5vw 0}
-  #rfilters .tab{padding:10px 16px;font-size:13px}
+@media (max-width:900px){
+  #rhero{padding:120px 5vw 32px}
+  #rhero h1{font-size:clamp(2rem,8vw,2.8rem);margin-top:12px}
+  #rhero .sub{font-size:15px;line-height:1.5;margin-top:12px}
 
-  #rgrid{padding:1.6em 5vw 10vh}
-  #rgrid .grid{grid-template-columns:1fr;gap:1.4em}
-  .rcard .body{padding:1.2em 1.3em 1.4em}
-  .rcard h3{font-size:20px}
-  .rcard p{font-size:15px}
-  .rcard .tag{font-size:11px}
-  .rcard .date{font-size:12px}
-  .rcard .read{font-size:14px}
+  #rfilters{padding:16px 5vw 0;justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
+  #rfilters::-webkit-scrollbar{display:none}
+  #rfilters .tabs{flex-wrap:nowrap;justify-content:flex-start;gap:8px;padding-bottom:8px}
+  #rfilters .tab{padding:10px 18px;font-size:14px;white-space:nowrap;flex:none;min-height:44px;display:inline-flex;align-items:center;scroll-snap-align:start}
 
-  #welcome{height:auto;padding:8vh 5vw}
-  #welcome h2,#welcome p,#welcome .form{position:static;width:auto;left:auto;top:auto;margin:0 auto 1.2em}
-  #welcome h2{font-size:clamp(1.8rem,7vw,2.6rem)}
-  #welcome p{font-size:15px}
-  #welcome .form{height:auto;flex-direction:column;max-width:320px}
-  #welcome .form input{padding:15px 20px;font-size:15px}
-  #welcome .form .btn{padding:15px 22px;font-size:14px}
+  #rgrid{padding:24px 5vw 60px}
+  #rgrid .grid{grid-template-columns:1fr;gap:24px}
+  .rcard{border-radius:16px}
+  .rcard .body{padding:20px}
+  .rcard h3{font-size:20px;line-height:1.3;margin-bottom:8px}
+  .rcard p{font-size:15px;line-height:1.5;color:rgba(255,255,255,.7)}
+  .rcard .tag{font-size:12px;letter-spacing:.05em}
+  .rcard .date{font-size:13px}
+  .rcard .read{font-size:15px;margin-top:16px}
 
-  #pfoot{height:auto;padding:8vh 5vw}
-  #pfoot .id,#pfoot .tagline,#pfoot .copyright,#pfoot .col{position:static;left:auto;top:auto}
-  #pfoot .id .logo{width:24px}
-  #pfoot .id b{font-size:18px}
-  #pfoot .tagline{font-size:15px;margin-top:1em}
-  #pfoot .copyright{font-size:14px;width:auto;margin-top:1em}
-  #pfoot .col{margin-top:2em}
-  #pfoot .col b{font-size:15px;margin-bottom:1em}
-  #pfoot .col a{font-size:15px;margin-bottom:.8em}
+  .site-footer{display:flex;flex-direction:column;gap:0;padding-bottom:48px}
+  .disclosures{padding:40px 8.9vw 40px 8.54vw}
+  .site-footer .foot-copy{margin-top:40px}
+  .site-footer .foot-social{margin-top:24px;gap:20px}
+  .site-footer .foot-col{margin-top:0;display:flex;flex-direction:column}
+  .site-footer .foot-col:first-of-type{margin-top:40px}
+  .site-footer .foot-col a{margin-top:24px}
+  .site-footer .foot-col a:first-child{margin-top:24px}
+  .site-footer .foot-col:first-of-type a:first-child{margin-top:0}
 }
 </style>
 </head>
 <body>
 
 <header class="nav" aria-label="dWallet">
-  <a class="logo" href="index.html"><img src="assets/img/logo.png" alt="" width="30" height="30"><b>dWallet.</b></a>
-  <nav class="links"><a class="dim" href="index.html#dsp">Personal</a><a class="dim" href="business.html">Business</a></nav>
-  <span class="sep"></span>
-  <a class="pill" href="https://personal.drumwave.com/sign-in">Log in</a>
-  <a class="pill p" href="https://personal.drumwave.com/">Open an Account</a>
+  <a class="logo" href="index.html">
+    <img class="mark" src="assets/img/logo.png" alt="" width="36" height="36">
+    <span class="rule" aria-hidden="true"></span>
+    <img class="wordmark" src="assets/img/dwallet-wordmark.png" alt="dWallet" width="112" height="26">
+  </a>
+  <nav class="links">
+    <a href="index.html#dsp">Personal</a>
+    <a href="business.html">Business</a>
+  </nav>
+  <span class="sep" aria-hidden="true"></span>
+  <div class="ctas">
+    <a class="pill" href="https://personal.drumwave.com/sign-in">Log in</a>
+    <a class="pill p" href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89">Open an Account &amp; get $25</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" onclick="document.getElementById('mobileMenuOverlay').classList.add('is-open');document.body.style.overflow='hidden';">
+    <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 1H19M1 7H19M1 13H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
 </header>
+
+<!-- MOBILE MENU OVERLAY & MODAL (Figma exact match 4222-21393) -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+  <div class="mobile-menu-card">
+    <div class="mobile-menu-head">
+      <a class="logo" href="index.html">
+        <img class="mark" src="assets/img/logo.png" alt="" width="28" height="28">
+        <span class="rule" aria-hidden="true"></span>
+        <img class="wordmark" src="assets/img/dwallet-wordmark.png" alt="dWallet" width="72" height="16">
+      </a>
+      <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu" onclick="document.getElementById('mobileMenuOverlay').classList.remove('is-open');document.body.style.overflow='';">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-menu-links">
+      <a href="index.html#dsp">Personal</a>
+      <a href="business.html">Business</a>
+    </div>
+    <div class="mobile-menu-actions">
+      <a class="btn-login" href="https://personal.drumwave.com/sign-in">Log in</a>
+      <a class="btn-account" href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89">Open an Account &amp; get $25</a>
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section id="rhero" aria-label="Resources">
   <img class="orb" src="assets/img/personal/dsp-glow-orb.png" alt="">
   <div class="eyebrow mono">RESOURCES</div>
   <h1 class="display">News, views &amp; ideas</h1>
-  <p class="sub">Press releases, media coverage, and thought leadership from the team building the data ownership economy.</p>
+  <p class="sub">Press releases, media coverage, and thought leadership from the team building the New Data Economy.</p>
 </section>
 
 <!-- FILTERS -->
@@ -212,37 +419,25 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   <p id="rempty">No resources in this category yet.</p>
 </section>
 
-<!-- WELCOME TO THE ONE ECONOMY -->
-<section id="welcome" aria-label="Welcome to the One Economy">
-  <h2 class="display">Welcome to the One Economy</h2>
-  <p>Where money and the value of data meet, giving everyone the opportunity to benefit.</p>
-  <form class="form" action="https://personal.drumwave.com/" method="get">
-    <input type="email" placeholder="Enter email" aria-label="Email">
-    <button class="btn" type="submit">Get started</button>
-  </form>
-</section>
-
 <!-- FOOTER -->
-<footer id="pfoot">
-  <img class="wave-bg" src="assets/img/business/footer-waves.png" alt="">
-  <div class="id">
-    <img class="logo" src="assets/img/personal/drumwave-logo.png" alt="">
-    <b>DrumWave</b>
+<footer class="site-footer">
+  <div>
+    <div class="foot-logo"><img src="assets/img/logo.png" alt="" width="42" height="42"><b>DrumWave</b></div>
+    <p class="foot-tag">Your Life. Your Story. Your Data.</p>
+    <p class="foot-copy">Copyright &copy; 2026 DrumWave Inc.<br>All rights reserved.</p>
+    <div class="foot-social">
+      <a href="https://linkedin.com/company/drumwave" target="_blank" rel="noopener" aria-label="DrumWave on LinkedIn"><img src="assets/img/icon-linkedin.svg" alt="" loading="lazy"></a>
+      <a href="https://youtube.com/@drumwave" target="_blank" rel="noopener" aria-label="DrumWave on YouTube"><img src="assets/img/icon-youtube.svg" alt="" loading="lazy"></a>
+    </div>
   </div>
-  <p class="tagline">Your Life. Your Story. Your Data.</p>
-  <p class="copyright">Copyright &copy; 2026 DrumWave Inc. All rights reserved.</p>
-  <div class="col links">
-    <b>Links</b>
-    <a href="#">DrumWave.com</a>
+  <div class="foot-col">
+    <a href="resources.html">News &amp; Media</a>
+    <a href="https://status.drumwave.com/" target="_blank" rel="noopener">System Status</a>
+    <a href="https://trust.drumwave.com/" target="_blank" rel="noopener">Security</a>
+  </div>
+  <div class="foot-col">
+    <a href="contact.html">Contact Us</a>
     <a href="privacy-policy.html">Privacy Policy</a>
-    <a href="resources.html">Resources</a>
-    <a href="contact.html">Contact</a>
-  </div>
-  <div class="col socials">
-    <b>Socials</b>
-    <a href="https://www.youtube.com/@Drumwave" target="_blank" rel="noopener">YouTube</a>
-    <a href="https://www.linkedin.com/company/drumwave" target="_blank" rel="noopener">Linkedin</a>
-    <a href="https://x.com/DrumWaveInc" target="_blank" rel="noopener">X</a>
   </div>
 </footer>
 
@@ -302,6 +497,34 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       emptyEl.textContent = 'Could not load resources right now.';
       emptyEl.style.display = 'block';
     });
+})();
+</script>
+
+<script>
+(function(){
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+  const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+  if(navToggle && mobileMenuOverlay){
+    function openMenu(){
+      mobileMenuOverlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu(){
+      mobileMenuOverlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    navToggle.addEventListener('click', openMenu);
+    if(mobileMenuClose) mobileMenuClose.addEventListener('click', closeMenu);
+    mobileMenuOverlay.addEventListener('click', function(e){
+      if(e.target === mobileMenuOverlay) closeMenu();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && mobileMenuOverlay.classList.contains('is-open')) closeMenu();
+    });
+  }
 })();
 </script>
 </body>
