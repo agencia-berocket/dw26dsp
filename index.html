@@ -711,10 +711,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .solution-preview .sol-slide{position:absolute;left:0;top:0;display:block;width:100%;height:auto;opacity:0}
 .solution-preview .sol-slide.is-on{opacity:1}
 /* The faded card beside it, Figma 5215:63939: it starts 424 into a 617 card and runs
-   to the frame's right edge, behind the card. Its height is the card export's own
-   (767 on 1234, 62.16%), so the two line up top and bottom whatever the width.
+   to the frame's right edge, behind the card, where #solution's clip cuts it off.
+   It is the next plan's full card export, so its height is the export's own (767 on
+   1234, 62.16%) and the two line up top and bottom whatever the width; .sol-peek-fade
+   holds it at the design's 10%, apart from the opacity the carousel tweens.
    The stack starts hidden and the scroll timeline brings it up with the carousel. */
 .solution-preview .sol-peeks{position:absolute;inset:0;z-index:1;opacity:0}
+.solution-preview .sol-peek-fade{position:absolute;inset:0;opacity:.1}
 .solution-preview .sol-peek{position:absolute;left:68.72%;top:0;display:block;height:62.16cqw;width:auto;max-width:none;opacity:0}
 .solution-preview .sol-peek.is-on{opacity:1}
 /* THE CAROUSEL FRAMING — Figma 5215:66457. The copy block is 138 in and 334.5 down
@@ -726,7 +729,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    mask of its own inside the line's: the line reveals on scroll, the word swaps on
    click. vertical-align:top keeps its glyphs on the line's own baseline — the inner
    line box is the same .99 as the outer one. */
-.solution-preview #solStateB{left:7.17vw;top:30.9vh;width:44.2vw;max-width:none}
+/* 48vw rather than the frame's 44.2: the first line never wraps, so the block has to
+   hold the longest brand — "Introducing the Anthropic" is 46.9vw — and still ends
+   short of the card at 58.59vw. A longer name than that needs this widened again. */
+.solution-preview #solStateB{left:7.17vw;top:30.9vh;width:48vw;max-width:none}
 .solution-preview #solStateB .sol-headline{font-size:clamp(2rem,4.6875vw,5.625rem);line-height:1.12;letter-spacing:-.03em;color:#E3E3E3}
 @media (min-width:761px){.solution-preview #solStateB .ln:first-child > span{white-space:nowrap}}
 .solution-preview .sol-brand{display:inline-block;vertical-align:top;overflow:hidden;padding-bottom:.27em;margin-bottom:-.27em;font-weight:600}
@@ -1389,13 +1395,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     <div class="sol-glow-ellipse" aria-hidden="true"></div>
 
     <!-- The first framing is the partner carousel. Each plan is one .sol-slide
-         (its brand goes into the headline, its offer link onto the button) and one
-         peek image, in the same order in both lists. The exports carry their own
-         corners, border and fade, so nothing here draws them. Adding a plan is one
-         more .sol-slide and one more peek; the dots are built from the slides. -->
+         (its brand goes into the headline, its offer link onto the button, its
+         colour onto the light spill beneath) and one peek, which is the next plan's
+         card — both lists in the same order. The exports carry their own corners and
+         border, so nothing here draws them. Adding a plan is one more .sol-slide and
+         one more peek; the dots are built from the slides. -->
     <div class="sol-state" id="solStateB">
       <div class="sol-headline">
-        <span class="ln"><span>Introducing the <span class="sol-brand"><span>Apple</span></span></span></span>
+        <span class="ln"><span>Introducing the <span class="sol-brand"><span>Walmart</span></span></span></span>
         <span class="ln"><span class="sol-blue">Data Savings Plan</span></span>
       </div>
       <p class="sol-body">Turn the data you generate every day into a source of financial opportunity, today and for the future.</p>
@@ -1417,15 +1424,31 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
           <path filter="url(#solGlowBlur)" fill="url(#solGlowFill)" d="M89.0174 40.0002L643.758 40L656.831 63.5447C672.947 92.5714 681.005 107.085 681.715 118.874C682.986 139.985 671.345 159.762 652.272 168.898C641.62 174 625.019 174 591.819 174H137.087C98.594 174 79.3476 174 68.1075 168.184C47.9425 157.751 36.8776 135.441 40.7748 113.074C42.9471 100.607 54.5943 85.2845 77.8887 54.6402L89.0174 40.0002Z"/>
         </svg>
       </div>
+      <!-- Each peek is the NEXT plan's own card export, faded to 10% by .sol-peek-fade,
+           so a plan needs no second image of its own. -->
       <div class="sol-peeks" aria-hidden="true">
-        <img class="sol-peek is-on" src="assets/img/dsp-slide-01-peek.webp" alt="" width="806" height="767">
-        <img class="sol-peek" src="assets/img/dsp-slide-02-peek.webp" alt="" width="796" height="773" loading="lazy">
-        <img class="sol-peek" src="assets/img/dsp-slide-03-peek.webp" alt="" width="797" height="773" loading="lazy">
+        <div class="sol-peek-fade">
+          <img class="sol-peek is-on" src="assets/img/dsp-card-02-amazon.webp" alt="" width="1234" height="767">
+          <img class="sol-peek" src="assets/img/dsp-card-03-apple.webp" alt="" width="1234" height="767" loading="lazy">
+          <img class="sol-peek" src="assets/img/dsp-card-04-chase.webp" alt="" width="1231" height="764" loading="lazy">
+          <img class="sol-peek" src="assets/img/dsp-card-05-nvidia.webp" alt="" width="1228" height="764" loading="lazy">
+          <img class="sol-peek" src="assets/img/dsp-card-06-anthropic.webp" alt="" width="1234" height="767" loading="lazy">
+          <img class="sol-peek" src="assets/img/dsp-card-07-google.webp" alt="" width="1234" height="767" loading="lazy">
+          <img class="sol-peek" src="assets/img/dsp-card-08-money.webp" alt="" width="1228" height="764" loading="lazy">
+          <img class="sol-peek" src="assets/img/dsp-card-09-uber.webp" alt="" width="1235" height="772" loading="lazy">
+          <img class="sol-peek" src="assets/img/dsp-card-01-walmart.webp" alt="" width="1235" height="772" loading="lazy">
+        </div>
       </div>
       <div class="sol-slides" aria-live="polite">
-        <img class="sol-slide is-on" data-brand="Apple" data-glow="#1FAE8C" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-01.webp" alt="dSavings Prism card with Apple, held by Alex Waverly, balance $170" width="1234" height="767">
-        <img class="sol-slide" data-brand="Amazon" data-glow="#E0873A" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-02.webp" alt="dSavings Reach card with Amazon" width="1244" height="773" loading="lazy">
-        <img class="sol-slide" data-brand="NVIDIA" data-glow="#4F95D8" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-03.webp" alt="dSavings Transit card with NVIDIA" width="1244" height="772" loading="lazy">
+        <img class="sol-slide is-on" data-brand="Walmart" data-glow="#4A86E0" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-card-01-walmart.webp" alt="dSavings Spark+ card with Walmart" width="1235" height="772">
+        <img class="sol-slide" data-brand="Amazon" data-glow="#E0873A" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-card-02-amazon.webp" alt="dSavings Prime Arc card with Amazon" width="1234" height="767" loading="lazy">
+        <img class="sol-slide" data-brand="Apple" data-glow="#1FAE8C" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-card-03-apple.webp" alt="dSavings Prism card with Apple" width="1234" height="767" loading="lazy">
+        <img class="sol-slide" data-brand="Chase" data-glow="#34A3BF" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-card-04-chase.webp" alt="dSavings Onyx card with Chase" width="1231" height="764" loading="lazy">
+        <img class="sol-slide" data-brand="NVIDIA" data-glow="#5B63E0" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-card-05-nvidia.webp" alt="dSavings Accelerate card with NVIDIA" width="1228" height="764" loading="lazy">
+        <img class="sol-slide" data-brand="Anthropic" data-glow="#E0845A" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-card-06-anthropic.webp" alt="dSavings AI Dividends card with Anthropic" width="1234" height="767" loading="lazy">
+        <img class="sol-slide" data-brand="Google" data-glow="#DDA03E" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-card-07-google.webp" alt="dSavings Path card with Google" width="1234" height="767" loading="lazy">
+        <img class="sol-slide" data-brand="X Money" data-glow="#5470DC" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-card-08-money.webp" alt="dSavings X Signal card with X Money" width="1228" height="764" loading="lazy">
+        <img class="sol-slide" data-brand="Uber" data-glow="#3A8FE0" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-card-09-uber.webp" alt="dSavings Uber One card with Uber" width="1235" height="772" loading="lazy">
       </div>
     </div>
 
