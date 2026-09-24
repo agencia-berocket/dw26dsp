@@ -242,6 +242,7 @@
   width: 100% !important;
   max-width: 100% !important;
   display: block !important;
+  margin-top: 6px !important;
   border: none !important;
   background: linear-gradient(138.73deg, #9B45F8 0%, #8331E7 100%) !important;
   color: #fff !important;
