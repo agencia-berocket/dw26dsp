@@ -353,6 +353,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* scenes */
 .act{position:relative;height:100vh;height:100svh;overflow:hidden;background:var(--ink)}
+/* The plan screen has buttons in it now (the carousel), and its glows run past the
+   right edge, so overflow:hidden left it a scrollable box: focusing or clicking a
+   control could slide the whole screen sideways inside itself. clip cuts the same
+   edge but cannot be scrolled. */
+#solution{overflow:clip}
 /* isolation:isolate on the run's own pin and on the section right after it: the same
    ghosting #solution's own isolation:isolate note describes — the previous section's
    content still painted behind the newly-pinned fixed layer, showing through for a
@@ -693,46 +698,67 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .solution-preview .sol-cta{position:absolute;left:5.75vw;top:75.5vh;z-index:2;pointer-events:auto;display:inline-flex;align-items:center;padding:12px 24px;border-radius:100px;background:#fff;color:#090908;font-family:'Titillium Web',sans-serif;font-weight:600;font-size:clamp(.85rem,.94vw,1.125rem);line-height:1;opacity:0;transition:background .25s}
 .solution-preview .sol-cta:hover{background:#E3E3E3}
 /* THE DSP CARD — Figma 3260-117245, measured off the 1920x1080 frame.
-   Built the way the design builds it: a photo bled past the clip, two blurred
-   colour casts over it, and the branding set on top — not one flat export, which
-   is why the old artwork could not carry the balance, the name or the number.
    .sol-card is the positioning wrapper so the light spill can sit outside the
-   card's own clip and still travel with it.
+   card's own clip and still travel with it. It is the same box in both framings:
+   the introducing screen shows the first plan's card, and the carousel picks up
+   from that same card rather than bringing in one of its own.
    31.11vh, not the 34.44vh of the node: the card used to ease up 3.33vh between the
-   introducing framing and the open-an-account framing, so the same card sat at two
-   different heights depending on which one you were looking at. Asked for: one x and
-   one y on both. 34.44 - 3.33 is 31.11, which keeps open-an-account exactly where it
-   already was and brings introducing up onto it, rather than moving the framing that
-   was right. The rise tween is gone with it — see the note where it used to be. */
+   two framings, so the same card sat at two different heights depending on which
+   one you were looking at. Asked for: one x and one y on both. 34.44 - 3.33 is
+   31.11, which keeps the second framing exactly where it already was and brings
+   introducing up onto it. The rise tween is gone with it — see the note where it
+   used to be. */
 .solution-preview .sol-card{position:absolute;left:58.59vw;top:31.11vh;width:32.14vw;aspect-ratio:617/386.076;opacity:0;container-type:inline-size}
 /* the spill of light the card throws onto the page beneath it */
 .solution-preview .sol-card-glow{position:absolute;left:-10.7%;top:102.31%;width:118.48%;height:34.71%;pointer-events:none}
 /* the spill image overruns its own box top and bottom — 214px of artwork in a
    134px slot. Squashing it to fit compresses the blur into a hard-edged band. */
 .solution-preview .sol-card-glow img{position:absolute;display:block;left:1.76%;top:-29.85%;width:98.74%;height:159.7%}
-.solution-preview .sol-card-face{position:absolute;inset:0;overflow:hidden;border:.29cqw solid rgba(255,255,255,.4);border-radius:4.68%/7.48%}
-/* the photo runs past every edge of the clip — left -43.8, top -15.8 at 844x474
-   inside a 617x386 face */
-.solution-preview .sol-card-photo{position:absolute;left:-7.1%;top:-4.09%;width:136.79%;height:122.77%}
-.solution-preview .sol-card-photo img{width:100%;height:100%;object-fit:cover}
-/* two casts thrown across the photo, both the same rotated blurred slab */
-.solution-preview .sol-cast{position:absolute;width:60.6%;height:61.68%;transform:rotate(-30.1deg);filter:blur(12.17cqw);pointer-events:none}
-.solution-preview .sol-cast-warm{left:-11.99%;top:-24.24%;background:#400202;opacity:.7}
-.solution-preview .sol-cast-cool{left:63.97%;top:-21.27%;background:rgba(19,56,158,.8);opacity:.6}
-/* branding, inset 36px on a 617 face = 5.83% */
-.solution-preview .sol-card-brand{position:absolute;left:5.83%;top:9.32%;right:5.83%;display:flex;align-items:center;gap:1.94cqw}
-.solution-preview .sol-card-brand .dsp-logo{flex:none;width:10.7%;aspect-ratio:1}
-.solution-preview .sol-card-brand .dsp-logo img{display:block;width:100%;height:100%}
-/* the wordmark is measured against "horizon" rather than the card, so the pair
-   stays locked together: 77.345 wide on a 50.515 type size */
-.solution-preview .sol-card-mark{display:flex;flex-direction:column;gap:.1em;font-size:8.19cqw}
-.solution-preview .sol-card-mark .dsp-word{display:block;width:1.531em;aspect-ratio:77.345/21.065}
-.solution-preview .sol-card-mark .dsp-word img{display:block;width:100%;height:100%}
-.solution-preview .sol-card-mark b{display:block;font-family:'Titillium Web',sans-serif;font-weight:600;font-size:1em;line-height:1.1;color:#fff}
-.solution-preview .sol-card-bal{position:absolute;right:5.83%;top:9.32%;font-family:'Open Sans',sans-serif;font-weight:600;font-size:5.85cqw;line-height:1.32;letter-spacing:-.02em;color:#fff}
-.solution-preview .sol-card-holder{position:absolute;left:5.83%;top:75.89%;display:flex;flex-direction:column;gap:2.27cqw;font-family:'Open Sans',sans-serif;font-weight:600;line-height:.99}
-.solution-preview .sol-card-holder span{font-size:3.89cqw;letter-spacing:.1em;color:#fff}
-.solution-preview .sol-card-holder em{font-style:normal;font-size:2.92cqw;letter-spacing:.1em;color:rgba(255,255,255,.5)}
+/* The card is the design's own export now, one per plan, stacked on each other and
+   crossfaded by the carousel. The export carries its corners and border, so the
+   stack only has to size it: full card width, its own height. */
+.solution-preview .sol-slides{position:absolute;inset:0;z-index:2}
+.solution-preview .sol-slide{position:absolute;left:0;top:0;display:block;width:100%;height:auto;opacity:0}
+.solution-preview .sol-slide.is-on{opacity:1}
+/* The faded card beside it, Figma 5215:63939: it starts 424 into a 617 card and runs
+   to the frame's right edge, behind the card. Its height is the card export's own
+   (767 on 1234, 62.16%), so the two line up top and bottom whatever the width.
+   Only the carousel framing shows them, so the stack starts hidden and the scroll
+   timeline brings it up with the carousel. */
+.solution-preview .sol-peeks{position:absolute;inset:0;z-index:1;opacity:0}
+.solution-preview .sol-peek{position:absolute;left:68.72%;top:0;display:block;height:62.16cqw;width:auto;max-width:none;opacity:0}
+.solution-preview .sol-peek.is-on{opacity:1}
+/* THE CAROUSEL FRAMING — Figma 5215:66457. The copy block is 138 in and 334.5 down
+   on the 1924x1082 frame; the headline is two lines of 90px on 1.12 at -2.7px, the
+   brand set in SemiBold, and the body sits 24 under it, Open Sans 24 on 1.5 at .7.
+   The first line never wraps: the frame widens the block to fit each brand (814,
+   850, 840), so the name has to stay on the line it is introduced on. The brand
+   name is the one word that changes, so it has a
+   mask of its own inside the line's: the line reveals on scroll, the word swaps on
+   click. vertical-align:top keeps its glyphs on the line's own baseline — the inner
+   line box is the same .99 as the outer one. */
+.solution-preview #solStateB{left:7.17vw;top:30.9vh;width:44.2vw;max-width:none}
+.solution-preview #solStateB .sol-headline{font-size:clamp(2rem,4.6875vw,5.625rem);line-height:1.12;letter-spacing:-.03em;color:#E3E3E3}
+@media (min-width:761px){.solution-preview #solStateB .ln:first-child > span{white-space:nowrap}}
+.solution-preview .sol-brand{display:inline-block;vertical-align:top;overflow:hidden;padding-bottom:.27em;margin-bottom:-.27em;font-weight:600}
+.solution-preview .sol-brand > span{display:inline-block;white-space:nowrap}
+.solution-preview #solStateB .sol-body{margin-top:1.25vw;max-width:42.3vw;font-size:clamp(.95rem,1.25vw,1.5rem);line-height:1.5;color:#fff}
+/* 24/48 of padding round 18px SemiBold. The frame's split-button also carries a
+   1px divider after the label with nothing on its far side; it is left out until
+   the design says what that second half is. */
+.solution-preview .sol-cta{padding:max(12px,1.25vw) max(24px,2.5vw);font-size:clamp(.85rem,.9375vw,1.125rem)}
+/* Prev/next and the dots. On the frame they are one row centred on the page, 877
+   down: 62px round buttons with the dots 146 in from each. Both buttons stay lit —
+   the carousel loops, so neither end is a dead end the way the frame's dimmed prev
+   suggests. autoAlpha on the row keeps it out of reach until its framing is up. */
+.solution-preview .sol-nav{position:absolute;left:50%;top:81.05vh;transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:7.62vw;pointer-events:auto;visibility:hidden;opacity:0}
+.solution-preview .sol-nav-btn{display:grid;place-items:center;width:max(44px,3.25vw);height:max(44px,3.25vw);padding:0;border:1px solid #fff;border-radius:50%;background:transparent;color:#fff;cursor:pointer;transition:background .25s,border-color .25s}
+.solution-preview .sol-nav-btn:hover{background:rgba(255,255,255,.1)}
+.solution-preview .sol-nav-btn:focus-visible,.solution-preview .sol-dot:focus-visible{outline:2px solid #0091ff;outline-offset:3px}
+.solution-preview .sol-nav-btn svg{width:50%;height:50%;fill:currentColor}
+.solution-preview .sol-dots{display:flex;align-items:center;gap:max(6px,.52vw)}
+.solution-preview .sol-dot{width:max(6px,.4167vw);height:max(6px,.4167vw);padding:0;border:0;border-radius:500px;background:rgba(255,255,255,.3);cursor:pointer;transition:width .35s cubic-bezier(.4,0,.2,1),background .35s}
+.solution-preview .sol-dot[aria-selected="true"]{width:max(24px,1.667vw);background:#0091ff}
 /* THE GLOWS BEHIND EVERYTHING — two #2731B6 discs of r419.5 under a 200 blur,
    at .4 and .2. Drawn rather than shipped as SVG: the source is a plain blurred
    circle, so CSS reproduces it exactly and scales with the viewport. */
@@ -1133,7 +1159,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
      it in both framings — so the card's top is derived from the text block's
      own box rather than calibrated separately per state. */
   .solution-preview .sol-card{left:50% !important;transform:translateX(-50%) !important;top:calc(13vh + 54.31vw + 8.2vw) !important;bottom:auto !important;width:84.4vw !important;max-width:329.6px !important}
-  .solution-preview .sol-cta{left:50% !important;transform:translateX(-50%) !important;top:calc(13vh + 54.31vw + 8.2vw + 52.81vw + 10vw) !important;bottom:auto !important;width:84.76vw !important;max-width:331px !important;height:50px !important;padding:0 24px !important;border-radius:500px !important;background:#fff !important;color:#090908 !important;font-family:'Titillium Web',sans-serif !important;font-weight:600 !important;font-size:1rem !important;display:flex !important;align-items:center !important;justify-content:center !important;text-align:center !important;text-decoration:none !important;box-shadow:0 4px 14px rgba(0,0,0,0.4) !important}
+  /* No phone frame for the carousel yet: the prev/next row goes between the card and
+     the button, and the button moves down by the row's height and one more gap. The
+     faded card beside it has no room on a centred phone card, so it stays off. */
+  .solution-preview .sol-peeks{display:none}
+  .solution-preview .sol-nav{top:calc(13vh + 54.31vw + 8.2vw + 52.81vw + 6vw);gap:28px}
+  .solution-preview .sol-cta{left:50% !important;transform:translateX(-50%) !important;top:calc(13vh + 54.31vw + 8.2vw + 52.81vw + 6vw + 44px + 6vw) !important;bottom:auto !important;width:84.76vw !important;max-width:331px !important;height:50px !important;padding:0 24px !important;border-radius:500px !important;background:#fff !important;color:#090908 !important;font-family:'Titillium Web',sans-serif !important;font-weight:600 !important;font-size:1rem !important;display:flex !important;align-items:center !important;justify-content:center !important;text-align:center !important;text-decoration:none !important;box-shadow:0 4px 14px rgba(0,0,0,0.4) !important}
   /* the vw paddings and gaps are a few pixels at this width, so set them in their own terms */
   .closing{padding-top:0}
   .closing-copy{width:327px;max-width:87.2vw}
@@ -1398,35 +1429,43 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <p class="sol-body">Turn the data you generate every day into a source of financial opportunity, today and for the future.</p>
     </div>
 
+    <!-- The second framing is the partner carousel. Each plan is one .sol-slide
+         (its brand goes into the headline, its offer link onto the button) and one
+         peek image, in the same order in both lists. The exports carry their own
+         corners, border and fade, so nothing here draws them. Adding a plan is one
+         more .sol-slide and one more peek; the dots are built from the slides. -->
     <div class="sol-state" id="solStateB">
       <div class="sol-headline">
-        <span class="ln"><span>Open an account,</span></span>
-        <span class="ln"><span>request your data,</span></span>
-        <span class="ln"><span>and <span class="sol-blue">earn $25.</span></span></span>
+        <span class="ln"><span>Introducing the <span class="sol-brand"><span>Apple</span></span></span></span>
+        <span class="ln"><span class="sol-blue">Data Savings Plan</span></span>
       </div>
+      <p class="sol-body">Turn the data you generate every day into a source of financial opportunity, today and for the future.</p>
     </div>
 
     <a class="sol-cta" href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89">View offer details</a>
 
-    <div class="sol-card">
+    <div class="sol-card" id="solCard" role="group" aria-roledescription="carousel" aria-label="Data Savings Plans">
       <div class="sol-card-glow" aria-hidden="true"><img src="assets/img/dsp-card-glow.svg" alt=""></div>
-      <div class="sol-card-face">
-        <div class="sol-card-photo"><img src="assets/img/dsp-card-hero.jpg" alt="" loading="lazy"></div>
-        <div class="sol-cast sol-cast-warm" aria-hidden="true"></div>
-        <div class="sol-cast sol-cast-cool" aria-hidden="true"></div>
-        <div class="sol-card-brand">
-          <span class="dsp-logo"><img src="assets/img/dsp-logo.svg" alt="" loading="lazy"></span>
-          <span class="sol-card-mark">
-            <span class="dsp-word"><img src="assets/img/dsp-dsavings.svg" alt="dSavings" loading="lazy"></span>
-            <b>horizon</b>
-          </span>
-        </div>
-        <div class="sol-card-bal">$170</div>
-        <div class="sol-card-holder">
-          <span>CAROLINA WAVERLY</span>
-          <em>************3875</em>
-        </div>
+      <div class="sol-peeks" aria-hidden="true">
+        <img class="sol-peek is-on" src="assets/img/dsp-slide-01-peek.webp" alt="" width="806" height="767">
+        <img class="sol-peek" src="assets/img/dsp-slide-02-peek.webp" alt="" width="796" height="773" loading="lazy">
+        <img class="sol-peek" src="assets/img/dsp-slide-03-peek.webp" alt="" width="797" height="773" loading="lazy">
       </div>
+      <div class="sol-slides" aria-live="polite">
+        <img class="sol-slide is-on" data-brand="Apple" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-01.webp" alt="dSavings Prism card with Apple, held by Alex Waverly, balance $170" width="1234" height="767">
+        <img class="sol-slide" data-brand="Amazon" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-02.webp" alt="dSavings Reach card with Amazon" width="1244" height="773" loading="lazy">
+        <img class="sol-slide" data-brand="NVIDIA" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-03.webp" alt="dSavings Transit card with NVIDIA" width="1244" height="772" loading="lazy">
+      </div>
+    </div>
+
+    <div class="sol-nav" id="solNav">
+      <button class="sol-nav-btn" type="button" data-dir="-1" aria-label="Previous plan">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg>
+      </button>
+      <div class="sol-dots" role="tablist" aria-label="Choose a plan"></div>
+      <button class="sol-nav-btn" type="button" data-dir="1" aria-label="Next plan">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4 4.6 4.6z"/></svg>
+      </button>
     </div>
   </div>
   <!-- The third framing. It used to be a section of its own that you scrolled down
@@ -2867,7 +2906,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   // 900. Anchor it under the headline instead, which is what that space is measured
   // from. The CSS keeps a static top as the pre-script fallback.
   const solCta = $('#solutionPreview .sol-cta'), solStateB = $('#solStateB');
-  const SOL_CTA_GAP = 3.4;   // vw — about 65px at 1920, the gap the designs use
+  const SOL_CTA_GAP = 2.6;   // vw — 50px at 1920, body to button on Figma 5215:63939
   const placeSolCta = () => {
     if(!solCta || !solStateB) return;
     solCta.style.top = '';
@@ -2879,6 +2918,73 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   };
   placeSolCta();
   ScrollTrigger.addEventListener('refresh', () => { fitSolHow(); placeSolCta(); });
+
+  // THE PARTNER CAROUSEL — the plan screen's second framing. Each .sol-slide is one
+  // plan and carries its brand and offer link; the peek at the same position is the
+  // faded card beside it. Click only, looping both ways. Every element the change
+  // touches moves on its own: the brand word leaves through its mask and the next one
+  // comes up as the mask resizes to it, the card slides out towards where the reader
+  // is heading and the next one slides in from the other side, the peek crossfades
+  // behind it, and the dot pill slides over (CSS).
+  const solCarousel = (() => {
+    const slides = $$('#solCard .sol-slide'), peeks = $$('#solCard .sol-peek');
+    const brandMask = $('#solStateB .sol-brand'), brandWord = brandMask && brandMask.firstElementChild;
+    const dotsEl = $('#solNav .sol-dots');
+    let cur = 0, swap = null;
+    if(slides.length < 2 || !brandWord || !dotsEl){
+      const nav = $('#solNav'); if(nav) nav.hidden = true;
+      return {go(){}};
+    }
+    const dots = slides.map((sl, i) => {
+      const d = document.createElement('button');
+      d.type = 'button'; d.className = 'sol-dot'; d.setAttribute('role', 'tab');
+      d.setAttribute('aria-label', sl.dataset.brand + ' Data Savings Plan');
+      d.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      d.addEventListener('click', () => go(i, i > cur ? 1 : -1));
+      dotsEl.appendChild(d);
+      return d;
+    });
+    const settle = () => {
+      slides.forEach((el, i) => el.classList.toggle('is-on', i === cur));
+      peeks.forEach((el, i) => el.classList.toggle('is-on', i === cur));
+      gsap.set([...slides, ...peeks, brandWord], {clearProps:'opacity,transform'});
+      brandWord.textContent = slides[cur].dataset.brand;
+      gsap.set(brandMask, {clearProps:'width'});
+    };
+    function go(next, dir){
+      next = (next + slides.length) % slides.length;
+      if(next === cur) return;
+      // a click mid-change lands the one in flight first, so the two never overlap
+      if(swap){ const s = swap; swap = null; s.progress(1).kill(); }
+      const prev = cur;
+      cur = next;
+      dots.forEach((d, i) => d.setAttribute('aria-selected', i === cur ? 'true' : 'false'));
+      const cta = $('#solutionPreview .sol-cta');
+      if(cta && slides[cur].dataset.href) cta.href = slides[cur].dataset.href;
+      const t = RM ? 0 : 1;
+      const tl = gsap.timeline({onComplete:() => { swap = null; settle(); }});
+      // the outgoing card clears quickly so the two are never both legible at once
+      tl.fromTo(slides[prev], {opacity:1, xPercent:0}, {opacity:0, xPercent:-6*dir, duration:.28*t, ease:'power1.in'}, 0);
+      tl.fromTo(slides[cur], {opacity:0, xPercent:12*dir, scale:.97}, {opacity:1, xPercent:0, scale:1, duration:.62*t, ease:'power3.out'}, .16*t);
+      if(peeks[prev]) tl.fromTo(peeks[prev], {opacity:1}, {opacity:0, duration:.3*t, ease:'power1.out'}, 0);
+      if(peeks[cur]) tl.fromTo(peeks[cur], {opacity:0, xPercent:10*dir}, {opacity:1, xPercent:0, duration:.6*t, ease:'power3.out'}, .2*t);
+      // measure the incoming word before anything paints, so the mask's resize can
+      // sit in this timeline and land with it if a second click cuts it short
+      const oldWord = brandWord.textContent, newWord = slides[cur].dataset.brand;
+      const fromW = brandMask.offsetWidth;
+      brandWord.textContent = newWord;
+      const toW = brandMask.offsetWidth;
+      brandWord.textContent = oldWord;
+      tl.to(brandWord, {yPercent:-110*dir, duration:.26*t, ease:'power2.in'}, 0);
+      tl.call(() => { brandWord.textContent = newWord; }, null, .26*t);
+      tl.fromTo(brandMask, {width:fromW}, {width:toW, duration:.4*t, ease:'power3.out', immediateRender:false}, .26*t);
+      tl.fromTo(brandWord, {yPercent:110*dir}, {yPercent:0, duration:.42*t, ease:'power3.out', immediateRender:false}, .26*t);
+      swap = tl;
+    }
+    $$('#solNav .sol-nav-btn').forEach(b =>
+      b.addEventListener('click', () => { const d = +b.dataset.dir; go(cur + d, d); }));
+    return {go};
+  })();
 
   // headStart brings the headline/card reveal closer to the very top of the pin.
   // Desktop keeps the original .14/.24/.40 offsets (its 500%-tall pin makes that
@@ -2898,9 +3004,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     tl.fromTo('#solStateA .sol-body', {opacity:0, y:16}, {opacity:.7, y:0, duration:.24, ease:'power2.out'}, headStart+.26);
     tl.to({}, {duration:.22}, .64);
 
-    // 2 — open an account, the card easing up between the two framings. The blue casts
-    // belong to the introducing screen only; the open-an-account screen wants a clean
-    // corner, so they leave with the copy that brought them in.
+    // 2 — the partner carousel. The card holds its place: the first plan's card is the
+    // one the introducing screen already showed, so the carousel picks up from it. The
+    // blue casts belong to the introducing screen only; this one wants a clean corner,
+    // so they leave with the copy that brought them in.
     // Every number in this unit is a little quicker than it was, to buy this framing a
     // plateau. It used to be whole only from 1.74, and its stop is at 2.0 — 281px of
     // scroll, the least of the three, and it ENDED on the stop, so a nudge past began
@@ -2918,7 +3025,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     // values across the two framings. It rests at the risen height now (see
     // .sol-card's top) and does not move between them at all.
     tl.fromTo(solB, {yPercent:SOL_OUT}, {yPercent:0, duration:.3, stagger:.08, ease:'power3.out'}, 1.25);
+    tl.fromTo('#solStateB .sol-body', {opacity:0, y:16}, {opacity:.7, y:0, duration:.24, ease:'power2.out'}, 1.37);
+    tl.fromTo('#solutionPreview .sol-peeks', {opacity:0, x:'2vw'}, {opacity:1, x:0, duration:.3, ease:'power2.out'}, 1.3);
     tl.fromTo('#solutionPreview .sol-cta', {opacity:0, y:12}, {opacity:1, y:0, duration:.24, ease:'power2.out'}, 1.47);
+    tl.fromTo('#solNav', {autoAlpha:0, y:12}, {autoAlpha:1, y:0, duration:.24, ease:'power2.out'}, 1.52);
 
     // 3 — how does a Data Savings Plan work. The card and the copy that framed it clear
     // out, and the four cards come up in their place. This is the beat that used to be a
@@ -2930,7 +3040,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       // their own stop at 3.0, which is what matters. The hold below is untouched, so
       // the timeline is still 4.0 and the three stops do not move.
       tl.fromTo(solB, {yPercent:0}, {yPercent:-112, duration:.26, stagger:.05}, 2.25);
+      tl.fromTo('#solStateB .sol-body', {opacity:.7}, {opacity:0, duration:.2}, 2.25);
       tl.fromTo('#solutionPreview .sol-cta', {opacity:1, y:0}, {opacity:0, y:-10, duration:.22}, 2.25);
+      tl.fromTo('#solNav', {autoAlpha:1, y:0}, {autoAlpha:0, y:-10, duration:.22}, 2.25);
+      tl.fromTo('#solutionPreview .sol-peeks', {opacity:1}, {opacity:0, duration:.28, ease:'power1.inOut'}, 2.27);
       tl.fromTo('#solutionPreview .sol-card', {opacity:1}, {opacity:0, duration:.32, ease:'power1.inOut'}, 2.29);
       tl.fromTo('#solutionPreview .sol-glow-ellipse', {opacity:.2}, {opacity:0, duration:.32, ease:'power1.inOut'}, 2.29);
       tl.fromTo('#solHow', {opacity:0}, {opacity:1, duration:.4, ease:'power1.inOut'}, 2.35);
@@ -2940,6 +3053,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
     // the hold that carries the last framing out of view unchanged
     tl.to({}, {duration: withCards ? .4 : 1.0}, withCards ? 3.0 : 2.0);
+    // Back above the carousel, the introducing screen is showing the card again, and
+    // that screen is the first plan's. So a reader who clicked through and scrolls
+    // back up sees the carousel return to it while the copy changes over.
+    tl.eventCallback('onUpdate', () => { if(tl.time() < 1.3) solCarousel.go(0, -1); });
     return tl;
   };
 
