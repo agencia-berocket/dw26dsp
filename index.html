@@ -669,15 +669,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* ACT 6 : THE SOLUTION — fades up on black at the end of the #ages pin */
 .solution-preview{position:absolute;inset:0;z-index:9;pointer-events:none}
 .solution-preview .sol-state{position:absolute;left:5.83vw;max-width:49vw;z-index:2}
-/* Figma 3260-117245: the copy block is vertically centred on the frame and 849px
-   wide on a 1920 measure, with the body 37px under the headline */
-.solution-preview #solStateA{top:50%;transform:translateY(-50%);width:44.22vw;max-width:none}
-/* State B's own node: 115 in from the left, 333 down, and 390 under a block that is
-   three 118.8 lines — 333+357+390 is the 1080 frame. So it is deliberately NOT
-   centred the way state A is; it sits 29px above centre, and the 3px of left is
-   its own too. Both states are drawn on their own frame, and the words differ
-   across the change, so neither offset reads as a jump. */
-.solution-preview #solStateB{left:5.99vw;top:30.8vh}
 .solution-preview .sol-headline{font-family:'Titillium Web',sans-serif;font-weight:400;font-size:clamp(2.2rem,6.25vw,7.5rem);line-height:.99;letter-spacing:-.03em;color:#E3E3E3}
 /* The descender of the g in "Introducing" and "Savings" was being cut off.
    Titillium's font box is 124px where line-height .99 gives an 81px line box, so the
@@ -695,25 +686,24 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* 28px. Node 3260:117251 gives this paragraph 84px across two lines, which is 42 a
    line — 28px on 1.5 leading, where it had been 20. */
 .solution-preview .sol-body{margin-top:1.93vw;max-width:none;font-family:'Open Sans',sans-serif;font-weight:400;font-size:clamp(1rem,1.458vw,1.75rem);line-height:1.5;color:#fff;opacity:0}
-.solution-preview .sol-cta{position:absolute;left:5.75vw;top:75.5vh;z-index:2;pointer-events:auto;display:inline-flex;align-items:center;padding:12px 24px;border-radius:100px;background:#fff;color:#090908;font-family:'Titillium Web',sans-serif;font-weight:600;font-size:clamp(.85rem,.94vw,1.125rem);line-height:1;opacity:0;transition:background .25s}
+.solution-preview .sol-cta{position:absolute;left:7.17vw;top:75.5vh;z-index:2;pointer-events:auto;display:inline-flex;align-items:center;padding:12px 24px;border-radius:100px;background:#fff;color:#090908;font-family:'Titillium Web',sans-serif;font-weight:600;font-size:clamp(.85rem,.94vw,1.125rem);line-height:1;opacity:0;transition:background .25s}
 .solution-preview .sol-cta:hover{background:#E3E3E3}
 /* THE DSP CARD — Figma 3260-117245, measured off the 1920x1080 frame.
    .sol-card is the positioning wrapper so the light spill can sit outside the
-   card's own clip and still travel with it. It is the same box in both framings:
-   the introducing screen shows the first plan's card, and the carousel picks up
-   from that same card rather than bringing in one of its own.
-   31.11vh, not the 34.44vh of the node: the card used to ease up 3.33vh between the
-   two framings, so the same card sat at two different heights depending on which
-   one you were looking at. Asked for: one x and one y on both. 34.44 - 3.33 is
-   31.11, which keeps the second framing exactly where it already was and brings
-   introducing up onto it. The rise tween is gone with it — see the note where it
-   used to be. */
+   card's own clip and still travel with it.
+   31.11vh, not the 34.44vh of the node: it keeps the carousel card where it has
+   always sat on screen. */
 .solution-preview .sol-card{position:absolute;left:58.59vw;top:31.11vh;width:32.14vw;aspect-ratio:617/386.076;opacity:0;container-type:inline-size}
 /* the spill of light the card throws onto the page beneath it */
 .solution-preview .sol-card-glow{position:absolute;left:-10.7%;top:102.31%;width:118.48%;height:34.71%;pointer-events:none}
 /* the spill image overruns its own box top and bottom — 214px of artwork in a
    134px slot. Squashing it to fit compresses the blur into a hard-edged band. */
-.solution-preview .sol-card-glow img{position:absolute;display:block;left:1.76%;top:-29.85%;width:98.74%;height:159.7%}
+.solution-preview .sol-card-glow svg{position:absolute;display:block;left:1.76%;top:-29.85%;width:98.74%;height:159.7%;overflow:visible}
+/* The spill takes the colour of the card that throws it: each .sol-slide carries its
+   own in data-glow, picked from the bottom band of its export (the part that sits
+   over the spill), and the carousel tweens --sol-glow across the change. The default
+   is the design's own blue, for a slide that does not name one. */
+.solution-preview .sol-card{--sol-glow:#2491F9}
 /* The card is the design's own export now, one per plan, stacked on each other and
    crossfaded by the carousel. The export carries its corners and border, so the
    stack only has to size it: full card width, its own height. */
@@ -723,8 +713,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* The faded card beside it, Figma 5215:63939: it starts 424 into a 617 card and runs
    to the frame's right edge, behind the card. Its height is the card export's own
    (767 on 1234, 62.16%), so the two line up top and bottom whatever the width.
-   Only the carousel framing shows them, so the stack starts hidden and the scroll
-   timeline brings it up with the carousel. */
+   The stack starts hidden and the scroll timeline brings it up with the carousel. */
 .solution-preview .sol-peeks{position:absolute;inset:0;z-index:1;opacity:0}
 .solution-preview .sol-peek{position:absolute;left:68.72%;top:0;display:block;height:62.16cqw;width:auto;max-width:none;opacity:0}
 .solution-preview .sol-peek.is-on{opacity:1}
@@ -759,31 +748,15 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .solution-preview .sol-dots{display:flex;align-items:center;gap:max(6px,.52vw)}
 .solution-preview .sol-dot{width:max(6px,.4167vw);height:max(6px,.4167vw);padding:0;border:0;border-radius:500px;background:rgba(255,255,255,.3);cursor:pointer;transition:width .35s cubic-bezier(.4,0,.2,1),background .35s}
 .solution-preview .sol-dot[aria-selected="true"]{width:max(24px,1.667vw);background:#0091ff}
-/* THE GLOWS BEHIND EVERYTHING — two #2731B6 discs of r419.5 under a 200 blur,
-   at .4 and .2. Drawn rather than shipped as SVG: the source is a plain blurred
-   circle, so CSS reproduces it exactly and scales with the viewport. */
-.solution-preview .sol-glow{position:absolute;width:43.7vw;aspect-ratio:1;border-radius:50%;background:#2731B6;filter:blur(10.42vw);pointer-events:none;opacity:0;z-index:0}
-.solution-preview .sol-glow-l{left:-11.77vw;top:-7.5vh}
-.solution-preview .sol-glow-r{left:71.35vw;top:1.48vh}
 /* Figma node 4254:33435, "Ellipse 22168": 839x839 at x:1239,y:742 on the
-   1920x1080 frame — 43.7vw wide at 64.53vw left, 68.7vh top, same #2731B6/
-   10.42vw-blur disc as .sol-glow above and .sol-how::after below. Drawn in
-   CSS rather than shipped as a PNG, for the same reason those are: the
-   source is a plain blurred circle. Rests at 0 like .sol-glow (both are
-   revealed by the GSAP timeline); its own tween below animates it to .2,
-   .sol-how::after's static resting level, rather than to 1. */
+   1920x1080 frame — 43.7vw wide at 64.53vw left, 68.7vh top, the same #2731B6/
+   10.42vw-blur disc as .sol-how::after below. Drawn in CSS rather than shipped as
+   a PNG: the source is a plain blurred circle. Rests at 0 and is revealed by the
+   GSAP timeline, which animates it to .2, .sol-how::after's static resting level. */
 .solution-preview .sol-glow-ellipse{position:absolute;left:64.53vw;top:68.7vh;width:43.7vw;aspect-ratio:1;border-radius:50%;background:#2731B6;opacity:0;filter:blur(10.42vw);pointer-events:none;z-index:0}
 
 /* ACT 7 : HOW IT WORKS + FAQ + FOOTER — one long scrolling screen */
 .how-scene{position:relative;background:var(--ink);overflow:hidden}
-/* The cards framing takes the same two blue casts as the introducing framing, at the
-   same size, position and levels — .4 and .2 of #2731B6 under a 10.42vw blur — so all
-   three beats of the plan sit on one lit ground. It used to carry a pair of radial
-   gradients that peaked at alpha .09, which is invisible.
-   These are pseudo-elements rather than the .sol-glow nodes themselves: those live
-   inside .solution-preview at z-index 9, which paints over the cards layer, whereas
-   .how-title and .how-steps already hold z-index 2 above these. They need no tween of
-   their own — they arrive and leave with .sol-how's own opacity. */
 /* The cards framing has 1 blue glow ellipse on the right side per Figma spec (node 4194-10146):
    839px x 839px, background: #2731B6, opacity: 0.2, filter: blur(200px).
    Positioned on the right side of the section. */
@@ -1141,25 +1114,23 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
      without it, iOS Safari has been seen to let the previous section's content
      (still painted just off-screen behind the newly-pinned fixed layer) show
      through for a frame or two during the pin handoff, especially with the
-     blurred .sol-glow layers nearby. The opaque background alone was not
+     blurred .sol-glow-ellipse nearby. The opaque background alone was not
      enough to stop that ghosting. */
   #solution{isolation:isolate}
   #solution, .solution-preview{background:#070707 !important}
-  /* Figma 4869:39900/39422: both framings reserve the same 212px text block on a
-     390.5px frame (54.31vw) before the card starts, whether the headline is two
-     lines or three — a fixed block height, not stacked auto height, is what keeps
-     the card at the same position across states. */
+  /* Figma 4869:39900/39422: the carousel reserves a fixed 212px text block on a
+     390.5px frame (54.31vw) before the card starts, so the card holds its position
+     however many lines the brand's headline takes. */
   .solution-preview .sol-state{left:6vw !important;width:88vw !important;max-width:88vw !important;height:54.31vw !important}
-  .solution-preview #solStateA,
   .solution-preview #solStateB{top:13vh !important;left:6vw !important;transform:none !important;width:88vw !important;max-width:88vw !important}
   .solution-preview .sol-headline{font-size:44px !important;line-height:44.8px !important;letter-spacing:-.7569px !important;color:#fff !important}
   .solution-preview .sol-body{width:100% !important;max-width:100% !important;margin-top:24px !important;font-size:0.95rem !important;line-height:1.45 !important;color:#E3E3E3 !important}
   /* Figma 4869:39900/39422: the text block sits at top:13vh and is a fixed
      54.31vw tall (see .sol-state above), and the card starts 32px (8.2vw) under
-     it in both framings — so the card's top is derived from the text block's
+     it — so the card's top is derived from the text block's
      own box rather than calibrated separately per state. */
   .solution-preview .sol-card{left:50% !important;transform:translateX(-50%) !important;top:calc(13vh + 54.31vw + 8.2vw) !important;bottom:auto !important;width:84.4vw !important;max-width:329.6px !important}
-  /* No phone frame for the carousel yet: the prev/next row goes between the card and
+  /* The prev/next row goes between the card and
      the button, and the button moves down by the row's height and one more gap. The
      faded card beside it has no room on a centred phone card, so it stays off. */
   .solution-preview .sol-peeks{display:none}
@@ -1399,7 +1370,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   </div>
 
   <!-- The label names the destination rather than the act: this scrolls to
-       #solution, which IS "Introducing the Data Savings Plan". -->
+       #solution, which opens on the partner carousel. -->
   <button class="age-skip" id="ageSkip" type="button" aria-label="Learn about data savings">
     <span class="age-skip-label mono">Learn about data savings</span>
     <img class="age-skip-arrow" src="assets/img/sept3-icon-skip-arrow.svg" alt="" width="7" height="8">
@@ -1407,29 +1378,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 </section>
 
-<!-- THE DATA SAVINGS PLAN — one screen that changes its mind three times. Moved to
-     after the age timeline: it now arrives once the reader has scrolled through
-     #worth and #ages. Nothing here is reached by scrolling into it: the reveal
-     scrubs in over the gesture that brings the reader to the screen, and each further
-     gesture crossfades the screen in place — "Introducing the" becomes "Open an
-     account" with the card lifting between them, and that becomes the four cards as
-     the card and its copy leave. The last quarter of the pin holds the cards, so they
-     stay put while the section scrolls away rather than unwinding on the way out. -->
+<!-- THE DATA SAVINGS PLAN — one screen, two framings. It arrives once the reader has
+     scrolled through #worth and #ages. Nothing here is reached by scrolling into it:
+     the partner carousel scrubs in over the gesture that brings the reader to the
+     screen, and the next gesture crossfades it in place into the four cards as the
+     card and its copy leave. The end of the pin holds the cards, so they stay put
+     while the section scrolls away rather than unwinding on the way out. -->
 <section class="act" id="solution" aria-label="Introducing the Data Savings Plan">
   <div class="solution-preview" id="solutionPreview">
-    <div class="sol-glow sol-glow-l" aria-hidden="true"></div>
-    <div class="sol-glow sol-glow-r" aria-hidden="true"></div>
     <div class="sol-glow-ellipse" aria-hidden="true"></div>
 
-    <div class="sol-state" id="solStateA">
-      <div class="sol-headline">
-        <span class="ln"><span>Introducing the</span></span>
-        <span class="ln"><span class="sol-blue">Data Savings Plan</span></span>
-      </div>
-      <p class="sol-body">Turn the data you generate every day into a source of financial opportunity, today and for the future.</p>
-    </div>
-
-    <!-- The second framing is the partner carousel. Each plan is one .sol-slide
+    <!-- The first framing is the partner carousel. Each plan is one .sol-slide
          (its brand goes into the headline, its offer link onto the button) and one
          peek image, in the same order in both lists. The exports carry their own
          corners, border and fade, so nothing here draws them. Adding a plan is one
@@ -1445,16 +1404,28 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     <a class="sol-cta" href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89">View offer details</a>
 
     <div class="sol-card" id="solCard" role="group" aria-roledescription="carousel" aria-label="Data Savings Plans">
-      <div class="sol-card-glow" aria-hidden="true"><img src="assets/img/dsp-card-glow.svg" alt=""></div>
+      <!-- dsp-card-glow.svg, inlined so the gradient can take --sol-glow -->
+      <div class="sol-card-glow" aria-hidden="true">
+        <svg viewBox="0 0 721.809 214" preserveAspectRatio="none" fill="none" focusable="false">
+          <defs>
+            <filter id="solGlowBlur" x="0" y="0" width="721.809" height="214" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="20"/></filter>
+            <linearGradient id="solGlowFill" x1="455.017" y1="40" x2="455.017" y2="145.5" gradientUnits="userSpaceOnUse">
+              <stop style="stop-color:var(--sol-glow);stop-opacity:.8"/>
+              <stop offset="1" style="stop-color:var(--sol-glow);stop-opacity:0"/>
+            </linearGradient>
+          </defs>
+          <path filter="url(#solGlowBlur)" fill="url(#solGlowFill)" d="M89.0174 40.0002L643.758 40L656.831 63.5447C672.947 92.5714 681.005 107.085 681.715 118.874C682.986 139.985 671.345 159.762 652.272 168.898C641.62 174 625.019 174 591.819 174H137.087C98.594 174 79.3476 174 68.1075 168.184C47.9425 157.751 36.8776 135.441 40.7748 113.074C42.9471 100.607 54.5943 85.2845 77.8887 54.6402L89.0174 40.0002Z"/>
+        </svg>
+      </div>
       <div class="sol-peeks" aria-hidden="true">
         <img class="sol-peek is-on" src="assets/img/dsp-slide-01-peek.webp" alt="" width="806" height="767">
         <img class="sol-peek" src="assets/img/dsp-slide-02-peek.webp" alt="" width="796" height="773" loading="lazy">
         <img class="sol-peek" src="assets/img/dsp-slide-03-peek.webp" alt="" width="797" height="773" loading="lazy">
       </div>
       <div class="sol-slides" aria-live="polite">
-        <img class="sol-slide is-on" data-brand="Apple" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-01.webp" alt="dSavings Prism card with Apple, held by Alex Waverly, balance $170" width="1234" height="767">
-        <img class="sol-slide" data-brand="Amazon" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-02.webp" alt="dSavings Reach card with Amazon" width="1244" height="773" loading="lazy">
-        <img class="sol-slide" data-brand="NVIDIA" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-03.webp" alt="dSavings Transit card with NVIDIA" width="1244" height="772" loading="lazy">
+        <img class="sol-slide is-on" data-brand="Apple" data-glow="#1FAE8C" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-01.webp" alt="dSavings Prism card with Apple, held by Alex Waverly, balance $170" width="1234" height="767">
+        <img class="sol-slide" data-brand="Amazon" data-glow="#E0873A" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-02.webp" alt="dSavings Reach card with Amazon" width="1244" height="773" loading="lazy">
+        <img class="sol-slide" data-brand="NVIDIA" data-glow="#4F95D8" data-href="https://personal.drumwave.com/offers/66aecb1e-740a-4d95-aa7a-f530689ffe89" src="assets/img/dsp-slide-03.webp" alt="dSavings Transit card with NVIDIA" width="1244" height="772" loading="lazy">
       </div>
     </div>
 
@@ -2829,8 +2800,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       // Landing exactly on solTop parks the scrub at progress 0 — the reveal
       // hasn't played, so the screen reads as empty. solTrig (set once the
       // desktop matchMedia below builds it) gives the pin's own scroll range;
-      // landing partway into its first stop arrives with "Introducing the
-      // Data Savings Plan" already on screen instead of before it.
+      // landing on its first stop arrives with the partner carousel already
+      // on screen instead of before it.
       const target = solTrig ? solTrig.start + (solTrig.end - solTrig.start) * solFirstStop : solTop;
       // Instant, not smooth: a smooth scroll still plays whatever is between
       // here and there frame by frame on the way past it. A single jump
@@ -2864,20 +2835,18 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   // Sits after the age timeline now, so ScrollTrigger creates this pin only once
   // #ages above it is already registered — stacked pins must be created in DOM
   // order or ScrollTrigger mis-measures each one's start against the last.
-  // It is scrubbed rather than autoplayed: the reader's gesture IS the transition. The
-  // pin is four viewports and the timeline four units, one per viewport, so each
-  // screen stop sits on a plateau —
-  //   0 -> 1   the reveal, ending held on "Introducing the Data Savings Plan"
-  //   1 -> 2   the dissolve to "Open an account"; the card holds its place
-  //   2 -> 3   the card and its copy leave, the four cards come up in their place
-  //   3 -> 4   held, so the cards stay put while the section scrolls away instead
+  // It is scrubbed rather than autoplayed: the reader's gesture IS the transition.
+  // One timeline unit per screen stop, so each stop sits on a plateau —
+  //   0 -> 1   the reveal, ending held on the partner carousel
+  //   1 -> 2   the card and its copy leave, the four cards come up in their place
+  //   2 -> end held, so the cards stay put while the section scrolls away instead
   //            of unwinding on the way out
   // Every fromTo takes immediateRender:false so the timeline does not paint its
   // start values over the page the moment it is built.
   // set once the desktop matchMedia below creates it, so the skip button can
   // land inside the pin's scrub range instead of only at its very start.
   let solTrig = null, solFirstStop = 0, solTrigVars = null;
-  const solA = lines('#solStateA .sol-headline'), solB = lines('#solStateB .sol-headline');
+  const solB = lines('#solStateB .sol-headline');
   // header.nav is the bar; the bare <nav> inside it is only the Personal/Business links
   const solHowEl = $('#solHow'), solHowFit = $('#solHowFit'),
         solHost = $('#howHost'), solSec = $('#solution'), navEl = $('header.nav');
@@ -2919,7 +2888,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   placeSolCta();
   ScrollTrigger.addEventListener('refresh', () => { fitSolHow(); placeSolCta(); });
 
-  // THE PARTNER CAROUSEL — the plan screen's second framing. Each .sol-slide is one
+  // THE PARTNER CAROUSEL — the plan screen's first framing. Each .sol-slide is one
   // plan and carries its brand and offer link; the peek at the same position is the
   // faded card beside it. Click only, looping both ways. Every element the change
   // touches moves on its own: the brand word leaves through its mask and the next one
@@ -2944,12 +2913,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       dotsEl.appendChild(d);
       return d;
     });
+    const card = $('#solCard');
+    const glowOf = i => slides[i].dataset.glow || '';
+    // the first plan's colour is on the card before the carousel ever moves
+    if(glowOf(0)) card.style.setProperty('--sol-glow', glowOf(0));
     const settle = () => {
       slides.forEach((el, i) => el.classList.toggle('is-on', i === cur));
       peeks.forEach((el, i) => el.classList.toggle('is-on', i === cur));
       gsap.set([...slides, ...peeks, brandWord], {clearProps:'opacity,transform'});
       brandWord.textContent = slides[cur].dataset.brand;
       gsap.set(brandMask, {clearProps:'width'});
+      if(glowOf(cur)) card.style.setProperty('--sol-glow', glowOf(cur));
     };
     function go(next, dir){
       next = (next + slides.length) % slides.length;
@@ -2968,6 +2942,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       tl.fromTo(slides[cur], {opacity:0, xPercent:12*dir, scale:.97}, {opacity:1, xPercent:0, scale:1, duration:.62*t, ease:'power3.out'}, .16*t);
       if(peeks[prev]) tl.fromTo(peeks[prev], {opacity:1}, {opacity:0, duration:.3*t, ease:'power1.out'}, 0);
       if(peeks[cur]) tl.fromTo(peeks[cur], {opacity:0, xPercent:10*dir}, {opacity:1, xPercent:0, duration:.6*t, ease:'power3.out'}, .2*t);
+      // the spill beneath shifts to the incoming card's colour as it arrives
+      if(glowOf(cur)) tl.to(card, {'--sol-glow':glowOf(cur), duration:.62*t, ease:'power2.inOut'}, .1*t);
       // measure the incoming word before anything paints, so the mask's resize can
       // sit in this timeline and land with it if a second click cuts it short
       const oldWord = brandWord.textContent, newWord = slides[cur].dataset.brand;
@@ -2994,91 +2970,64 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   const buildSolTl = (withCards, headStart = .14) => {
     const tl = gsap.timeline({defaults:{ease:'none', immediateRender:false}});
 
-    // 1 — introducing the Data Savings Plan. The two blue casts come up first, so the
-    // copy lands on a lit page rather than on flat black — .4 and .2, the levels the
-    // design gives them.
-    tl.fromTo('#solutionPreview .sol-glow-l', {opacity:0}, {opacity:.32, duration:.5, ease:'power1.out'}, 0);
-    tl.fromTo('#solutionPreview .sol-glow-r', {opacity:0}, {opacity:.16, duration:.5, ease:'power1.out'}, 0);
-    tl.fromTo(solA, {yPercent:SOL_OUT}, {yPercent:0, duration:.3, stagger:.08, ease:'power3.out'}, headStart);
+    // 1 — the partner carousel. Its blue cast comes up first, so the copy lands on a
+    // lit page rather than on flat black; the card follows the headline, then the
+    // peek, the body, the button and the prev/next row.
+    tl.fromTo('#solutionPreview .sol-glow-ellipse', {opacity:0}, {opacity:.2, duration:.5, ease:'power1.out'}, 0);
+    tl.fromTo(solB, {yPercent:SOL_OUT}, {yPercent:0, duration:.3, stagger:.08, ease:'power3.out'}, headStart);
     tl.fromTo('#solutionPreview .sol-card', {opacity:0, scale:1.04}, {opacity:1, scale:1, duration:.34, ease:'power2.out'}, headStart+.10);
-    tl.fromTo('#solStateA .sol-body', {opacity:0, y:16}, {opacity:.7, y:0, duration:.24, ease:'power2.out'}, headStart+.26);
-    tl.to({}, {duration:.22}, .64);
+    tl.fromTo('#solutionPreview .sol-peeks', {opacity:0, x:'2vw'}, {opacity:1, x:0, duration:.3, ease:'power2.out'}, headStart+.15);
+    tl.fromTo('#solStateB .sol-body', {opacity:0, y:16}, {opacity:.7, y:0, duration:.24, ease:'power2.out'}, headStart+.22);
+    tl.fromTo('#solutionPreview .sol-cta', {opacity:0, y:12}, {opacity:1, y:0, duration:.24, ease:'power2.out'}, headStart+.32);
+    tl.fromTo('#solNav', {autoAlpha:0, y:12}, {autoAlpha:1, y:0, duration:.24, ease:'power2.out'}, headStart+.37);
 
-    // 2 — the partner carousel. The card holds its place: the first plan's card is the
-    // one the introducing screen already showed, so the carousel picks up from it. The
-    // blue casts belong to the introducing screen only; this one wants a clean corner,
-    // so they leave with the copy that brought them in.
-    // Every number in this unit is a little quicker than it was, to buy this framing a
-    // plateau. It used to be whole only from 1.74, and its stop is at 2.0 — 281px of
-    // scroll, the least of the three, and it ENDED on the stop, so a nudge past began
-    // dismantling it at once. It is now whole from 1.64 and does not start leaving
-    // until 2.2, which puts the stop inside the plateau rather than at its edge.
-    tl.fromTo(solA, {yPercent:0}, {yPercent:-112, duration:.26, stagger:.05}, 1.15);
-    tl.fromTo('#solStateA .sol-body', {opacity:.7}, {opacity:0, duration:.2}, 1.15);
-    tl.fromTo('#solutionPreview .sol-glow-l', {opacity:.32}, {opacity:0, duration:.3, ease:'power1.inOut'}, 1.15);
-    tl.fromTo('#solutionPreview .sol-glow-r', {opacity:.16}, {opacity:0, duration:.3, ease:'power1.inOut'}, 1.15);
-    // Figma node 4254:33435: this glow belongs to the "open an account" framing
-    // the card sits in, so it arrives and leaves with the card rather than with
-    // the introducing framing's own pair above.
-    tl.fromTo('#solutionPreview .sol-glow-ellipse', {opacity:0}, {opacity:.2, duration:.3, ease:'power1.out'}, 1.15);
-    // The card used to ease up 3.33vh here, which is what gave it two different y
-    // values across the two framings. It rests at the risen height now (see
-    // .sol-card's top) and does not move between them at all.
-    tl.fromTo(solB, {yPercent:SOL_OUT}, {yPercent:0, duration:.3, stagger:.08, ease:'power3.out'}, 1.25);
-    tl.fromTo('#solStateB .sol-body', {opacity:0, y:16}, {opacity:.7, y:0, duration:.24, ease:'power2.out'}, 1.37);
-    tl.fromTo('#solutionPreview .sol-peeks', {opacity:0, x:'2vw'}, {opacity:1, x:0, duration:.3, ease:'power2.out'}, 1.3);
-    tl.fromTo('#solutionPreview .sol-cta', {opacity:0, y:12}, {opacity:1, y:0, duration:.24, ease:'power2.out'}, 1.47);
-    tl.fromTo('#solNav', {autoAlpha:0, y:12}, {autoAlpha:1, y:0, duration:.24, ease:'power2.out'}, 1.52);
-
-    // 3 — how does a Data Savings Plan work. The card and the copy that framed it clear
+    // 2 — how does a Data Savings Plan work. The card and the copy that framed it clear
     // out, and the four cards come up in their place. This is the beat that used to be a
     // section below; on anything wider than a phone it happens on the spot.
     if(withCards){
-      // 2.2 rather than 2.0: the extra fifth of a unit is the headroom the open-an-
-      // account framing now has past its stop. The cards then have less of the unit to
-      // arrive in, so their moves are quicker too — they still finish at 2.91, ahead of
-      // their own stop at 3.0, which is what matters. The hold below is untouched, so
-      // the timeline is still 4.0 and the three stops do not move.
-      tl.fromTo(solB, {yPercent:0}, {yPercent:-112, duration:.26, stagger:.05}, 2.25);
-      tl.fromTo('#solStateB .sol-body', {opacity:.7}, {opacity:0, duration:.2}, 2.25);
-      tl.fromTo('#solutionPreview .sol-cta', {opacity:1, y:0}, {opacity:0, y:-10, duration:.22}, 2.25);
-      tl.fromTo('#solNav', {autoAlpha:1, y:0}, {autoAlpha:0, y:-10, duration:.22}, 2.25);
-      tl.fromTo('#solutionPreview .sol-peeks', {opacity:1}, {opacity:0, duration:.28, ease:'power1.inOut'}, 2.27);
-      tl.fromTo('#solutionPreview .sol-card', {opacity:1}, {opacity:0, duration:.32, ease:'power1.inOut'}, 2.29);
-      tl.fromTo('#solutionPreview .sol-glow-ellipse', {opacity:.2}, {opacity:0, duration:.32, ease:'power1.inOut'}, 2.29);
-      tl.fromTo('#solHow', {opacity:0}, {opacity:1, duration:.4, ease:'power1.inOut'}, 2.35);
-      tl.fromTo('#solHow .how-title', {y:26}, {y:0, duration:.34, ease:'power2.out'}, 2.39);
-      tl.fromTo('#solHow .step', {y:36, opacity:0}, {y:0, opacity:1, duration:.36, stagger:.05, ease:'power2.out'}, 2.45);
+      // 1.25 rather than 1.0: the carousel keeps a quarter unit of plateau past its
+      // stop, so a nudge past it does not start dismantling it at once. The cards
+      // still finish at 1.91, ahead of their own stop at 2.0.
+      tl.fromTo(solB, {yPercent:0}, {yPercent:-112, duration:.26, stagger:.05}, 1.25);
+      tl.fromTo('#solStateB .sol-body', {opacity:.7}, {opacity:0, duration:.2}, 1.25);
+      tl.fromTo('#solutionPreview .sol-cta', {opacity:1, y:0}, {opacity:0, y:-10, duration:.22}, 1.25);
+      tl.fromTo('#solNav', {autoAlpha:1, y:0}, {autoAlpha:0, y:-10, duration:.22}, 1.25);
+      tl.fromTo('#solutionPreview .sol-peeks', {opacity:1}, {opacity:0, duration:.28, ease:'power1.inOut'}, 1.27);
+      tl.fromTo('#solutionPreview .sol-card', {opacity:1}, {opacity:0, duration:.32, ease:'power1.inOut'}, 1.29);
+      tl.fromTo('#solutionPreview .sol-glow-ellipse', {opacity:.2}, {opacity:0, duration:.32, ease:'power1.inOut'}, 1.29);
+      tl.fromTo('#solHow', {opacity:0}, {opacity:1, duration:.4, ease:'power1.inOut'}, 1.35);
+      tl.fromTo('#solHow .how-title', {y:26}, {y:0, duration:.34, ease:'power2.out'}, 1.39);
+      tl.fromTo('#solHow .step', {y:36, opacity:0}, {y:0, opacity:1, duration:.36, stagger:.05, ease:'power2.out'}, 1.45);
     }
 
-    // the hold that carries the last framing out of view unchanged
-    tl.to({}, {duration: withCards ? .4 : 1.0}, withCards ? 3.0 : 2.0);
-    // Back above the carousel, the introducing screen is showing the card again, and
-    // that screen is the first plan's. So a reader who clicked through and scrolls
-    // back up sees the carousel return to it while the copy changes over.
-    tl.eventCallback('onUpdate', () => { if(tl.time() < 1.3) solCarousel.go(0, -1); });
+    // the hold that carries the last framing out of view unchanged. On a phone the
+    // carousel is the only framing, so its hold is only long enough to settle on it
+    // before the page scrolls on — the timeline ends at 1.0.
+    if(withCards) tl.to({}, {duration:.4}, 2.0);
+    else tl.to({}, {duration:.35}, .65);
+    // A reader who clicked through the plans and scrolls back above the section
+    // finds the carousel on the first plan again the next time it comes in.
+    tl.eventCallback('onUpdate', () => { if(tl.time() < headStart) solCarousel.go(0, -1); });
     return tl;
   };
 
-  // One framing fewer on a phone, and the cards parented to their own section instead.
+  // No cards framing on a phone, and the cards parented to their own section instead.
   // matchMedia rebuilds the pin and the timeline on either side of the breakpoint and
   // reverts what the other side had set.
   gsap.matchMedia().add('(min-width: 761px)', () => {
     solSec.appendChild(solHowEl);
     const tl = buildSolTl(true);
-    // The timeline is still 4.0 units regardless of the pin's own length in vh — this
-    // does not add or move a stop, it only sets how many pixels each unit costs.
-    const solSnap = [0, 1, 2, 3].filter(t => t < tl.duration() - .05)
+    // The pin's length in vh does not add or move a stop, it only sets how many
+    // pixels each timeline unit costs.
+    const solSnap = [0, 1, 2].filter(t => t < tl.duration() - .05)
                                 .map(t => t / tl.duration()).concat([1]);
     // Pulled out so the skip button can rebuild this trigger from scratch —
     // see solTrigVars below.
     solTrigVars = {trigger:'#solution', start:'top top',
-      // Cut from 500% to 320%, the same reduction act1's own RUN_PINS got, for the
-      // same complaint: at 500% each of the 4 stops sat 125% of a viewport apart —
-      // over a full screen of scroll with nothing new on screen until the next
-      // stop fired, which read as the page stalling between transitions. 320%
-      // brings that down to 80%.
-      end:'+=320%', pin:true, scrub:true, animation:tl,
+      // ~94% of a viewport per timeline unit, the pace this pin had with three
+      // framings (320% over 3.4 units) — now 2.4 units with the introducing
+      // screen gone. Any longer and the page reads as stalling between stops.
+      end:'+=225%', pin:true, scrub:true, animation:tl,
       // directional:true added: every other snap-driven pin on the site has it, and
       // without it a moderate forward scroll can be pulled BACK to a nearer stop it
       // had already cleared, which reads as the page fighting the reader — the
@@ -3087,8 +3036,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       snap:{snapTo:solSnap, directional:true, duration:{min:.25, max:.6}, delay:.08, ease:'power2.inOut'}};
     const trig = ScrollTrigger.create(solTrigVars);
     solTrig = trig;
-    // solSnap[1] is exactly the first stop — "Introducing the Data Savings
-    // Plan" fully revealed and held — as a fraction of the pin's scroll range.
+    // solSnap[1] is exactly the first stop — the partner carousel fully
+    // revealed and held — as a fraction of the pin's scroll range.
     solFirstStop = solSnap[1] != null ? solSnap[1] : 0;
     fitSolHow();
     return () => { trig.kill(); tl.kill(); solTrig = null; solFirstStop = 0; solTrigVars = null; };
@@ -3099,14 +3048,20 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     // same absolute gap the desktop uses would still be ~120px of flat black
     // right as the reader arrives from #ages, before anything renders at all.
     const tl = buildSolTl(false, .02);
+    // One viewport: the reveal takes the first two thirds of it and the carousel
+    // holds for the rest. At 200% the reader had a full screen and more of scrolling
+    // past a carousel that no longer changed before the next section came up.
     const trig = ScrollTrigger.create({trigger:'#solution', start:'top top',
-      end:'+=300%', pin:true, scrub:true, animation:tl});
+      end:'+=100%', pin:true, scrub:true, animation:tl});
+    // no snap here, so the skip button can scroll straight onto the carousel: from
+    // .7 it is whole and held
+    solTrig = trig; solFirstStop = .7 / tl.duration();
     // the cards lift into view on the way past, the way every other block in the
     // scrolling part of the page does
     const lift = gsap.fromTo('#howHost .step', {opacity:0, y:28},
       {opacity:1, y:0, duration:.6, stagger:.08, ease:'power2.out',
        scrollTrigger:{trigger:'#howHost', start:'top 82%'}});
-    return () => { trig.kill(); tl.kill(); lift.scrollTrigger && lift.scrollTrigger.kill(); lift.kill(); };
+    return () => { trig.kill(); tl.kill(); solTrig = null; solFirstStop = 0; lift.scrollTrigger && lift.scrollTrigger.kill(); lift.kill(); };
   });
 
   /* ---------- ACT 7 : HOW IT WORKS + FAQ + FOOTER ---------- */
