@@ -64,7 +64,7 @@ const itemListJsonLd = JSON.stringify({
   "itemListElement": items.map((item, i) => ({
     "@type": "ListItem",
     "position": i + 1,
-    "url": `https://drumwave.com/resources/post.html?slug=${encodeURIComponent(item.slug)}`,
+    "url": `https://dw26dsp.berocket.com.br/resources/post.html?slug=${encodeURIComponent(item.slug)}`,
     "name": item.title,
   })),
 }, null, 2);
@@ -77,14 +77,14 @@ const html = `<!doctype html>
 <title>DrumWave News, Press & Insights: Full Archive</title>
 <meta name="description" content="Full, plain-text index of DrumWave's press releases, media coverage, and thought leadership — every entry, with a summary and a link to the full story.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://drumwave.com/resources/archive.html">
+<link rel="canonical" href="https://dw26dsp.berocket.com.br/resources/archive.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DrumWave">
 <meta property="og:title" content="DrumWave News, Press & Insights: Full Archive">
 <meta property="og:description" content="Full, plain-text index of DrumWave's press releases, media coverage, and thought leadership.">
-<meta property="og:url" content="https://drumwave.com/resources/archive.html">
-<meta property="og:image" content="https://drumwave.com/assets/img/android-chrome-512x512.png">
+<meta property="og:url" content="https://dw26dsp.berocket.com.br/resources/archive.html">
+<meta property="og:image" content="https://dw26dsp.berocket.com.br/assets/img/android-chrome-512x512.png">
 <meta property="og:image:width" content="512">
 <meta property="og:image:height" content="512">
 <meta property="og:image:alt" content="DrumWave logo">
@@ -92,7 +92,7 @@ const html = `<!doctype html>
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DrumWave News, Press & Insights: Full Archive">
 <meta name="twitter:description" content="Full, plain-text index of DrumWave's press releases, media coverage, and thought leadership.">
-<meta name="twitter:image" content="https://drumwave.com/assets/img/android-chrome-512x512.png">
+<meta name="twitter:image" content="https://dw26dsp.berocket.com.br/assets/img/android-chrome-512x512.png">
 
 <script type="application/ld+json">
 ${itemListJsonLd}
