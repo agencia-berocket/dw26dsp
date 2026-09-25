@@ -1124,24 +1124,31 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
      enough to stop that ghosting. */
   #solution{isolation:isolate}
   #solution, .solution-preview{background:#070707 !important}
-  /* Figma 4869:39900/39422: the carousel reserves a fixed 212px text block on a
-     390.5px frame (54.31vw) before the card starts, so the card holds its position
-     however many lines the brand's headline takes. */
-  .solution-preview .sol-state{left:6vw !important;width:88vw !important;max-width:88vw !important;height:54.31vw !important}
-  .solution-preview #solStateB{top:13vh !important;left:6vw !important;transform:none !important;width:88vw !important;max-width:88vw !important}
-  .solution-preview .sol-headline{font-size:44px !important;line-height:44.8px !important;letter-spacing:-.7569px !important;color:#fff !important}
-  .solution-preview .sol-body{width:100% !important;max-width:100% !important;margin-top:24px !important;font-size:0.95rem !important;line-height:1.45 !important;color:#E3E3E3 !important}
-  /* Figma 4869:39900/39422: the text block sits at top:13vh and is a fixed
-     54.31vw tall (see .sol-state above), and the card starts 32px (8.2vw) under
-     it — so the card's top is derived from the text block's
-     own box rather than calibrated separately per state. */
-  .solution-preview .sol-card{left:50% !important;transform:translateX(-50%) !important;top:calc(13vh + 54.31vw + 8.2vw) !important;bottom:auto !important;width:84.4vw !important;max-width:329.6px !important}
-  /* The prev/next row goes between the card and
-     the button, and the button moves down by the row's height and one more gap. The
-     faded card beside it has no room on a centred phone card, so it stays off. */
+  /* The carousel on a phone is one column — copy, card, prev/next, button — laid
+     out by flex rather than by absolute tops. Those tops were sums of vw, so on a
+     wide or short phone (a 430px-wide screen, or any browser with its toolbars up)
+     the column ran past the bottom of the pinned screen and the prev/next row and
+     the button were never seen. Now the column is centred in the room under the nav
+     and every gap and the card itself give way to the screen's height, so the
+     button is always on screen. The DOM has the button before the card, so order
+     puts them back in reading order. */
+  .solution-preview{display:flex;flex-direction:column;justify-content:center;padding:84px 6vw 3svh}
+  .solution-preview #solStateB{order:1;position:relative !important;top:auto !important;left:auto !important;transform:none !important;width:auto !important;max-width:none !important;height:auto !important}
+  .solution-preview .sol-headline{font-size:min(44px,11.3vw,5.3svh) !important;line-height:1.02 !important;letter-spacing:-.017em !important;color:#fff !important}
+  /* the brand always takes a line of its own — "Introducing the" / brand / "Data
+     Savings Plan" — rather than joining the first line when the name is short. A
+     block the width of its word, so the carousel's width tween still sizes the mask. */
+  .solution-preview .sol-brand{display:block;width:fit-content}
+  .solution-preview .sol-body{width:100% !important;max-width:100% !important;margin-top:min(24px,2.6svh) !important;font-size:0.95rem !important;line-height:1.45 !important;color:#E3E3E3 !important}
+  /* Figma 4869:39900/39422 width (84.4vw, at most 329.6px), unless the screen is too
+     short for it: 500px is roughly everything else in the column, and 1.6 is the
+     card's aspect, so the card takes what height is left and never less than 200px
+     across. No transform here — the reveal scales it. */
+  .solution-preview .sol-card{order:2;position:relative !important;left:auto !important;top:auto !important;bottom:auto !important;transform:none;flex-shrink:0;margin:min(32px,3.5svh) auto 0;width:clamp(200px,(100svh - 500px) * 1.6,min(84.4vw,329.6px)) !important;max-width:none !important}
+  /* the faded card beside it has no room on a centred phone card, so it stays off */
   .solution-preview .sol-peeks{display:none}
-  .solution-preview .sol-nav{top:calc(13vh + 54.31vw + 8.2vw + 52.81vw + 6vw);gap:28px}
-  .solution-preview .sol-cta{left:50% !important;transform:translateX(-50%) !important;top:calc(13vh + 54.31vw + 8.2vw + 52.81vw + 6vw + 44px + 6vw) !important;bottom:auto !important;width:84.76vw !important;max-width:331px !important;height:50px !important;padding:0 24px !important;border-radius:500px !important;background:#fff !important;color:#090908 !important;font-family:'Titillium Web',sans-serif !important;font-weight:600 !important;font-size:1rem !important;display:flex !important;align-items:center !important;justify-content:center !important;text-align:center !important;text-decoration:none !important;box-shadow:0 4px 14px rgba(0,0,0,0.4) !important}
+  .solution-preview .sol-nav{order:3;position:relative;left:auto;top:auto;transform:none;align-self:center;flex-shrink:0;margin-top:min(28px,3svh);gap:28px}
+  .solution-preview .sol-cta{order:4;position:relative !important;left:auto !important;top:auto !important;bottom:auto !important;transform:none;flex-shrink:0;margin:min(24px,2.6svh) auto 0 !important;width:100% !important;max-width:331px !important;height:50px !important;padding:0 24px !important;border-radius:500px !important;background:#fff !important;color:#090908 !important;font-family:'Titillium Web',sans-serif !important;font-weight:600 !important;font-size:1rem !important;display:flex !important;align-items:center !important;justify-content:center !important;text-align:center !important;text-decoration:none !important;box-shadow:0 4px 14px rgba(0,0,0,0.4) !important}
   /* the vw paddings and gaps are a few pixels at this width, so set them in their own terms */
   .closing{padding-top:0}
   .closing-copy{width:327px;max-width:87.2vw}
